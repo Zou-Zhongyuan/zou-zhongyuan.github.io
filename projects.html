@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Zhongyuan Zou 的精选软件工程作品、工程原型与研究记录">
+<title>作品档案 · Zhongyuan Zou</title>
+<style>
+:root{color-scheme:light dark;--bg:#f4f6f9;--ink:#162033;--panel:#fff;--line:#d3dbe7;--accent:#174f94}
+@media(prefers-color-scheme:dark){:root{--bg:#111724;--ink:#eef2fa;--panel:#191f2f;--line:#354159;--accent:#a3c9ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:1rem/1.65 system-ui,sans-serif}
+main,nav{max-width:70rem;margin:auto;padding:1rem clamp(1rem,4vw,3rem)}
+nav{display:flex;flex-wrap:wrap;gap:1rem;border-bottom:1px solid var(--line)}
+a{color:var(--accent);text-underline-offset:.18em}
+header{padding:clamp(1.5rem,6vw,4rem) 0 1rem}
+h1{font-size:clamp(2.35rem,7vw,4.8rem);line-height:1.12;margin:0 0 1rem}
+h2{margin:2rem 0 .75rem;scroll-margin-top:1rem}
+h3{line-height:1.3;margin:.2rem 0}
+section{margin-bottom:2.5rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:1rem}
+article{padding:1.3rem;border:1px solid var(--line);border-radius:1rem;background:var(--panel);scroll-margin-top:1rem}
+article p:last-child{margin-bottom:0}
+</style>
+</head>
+<body>
+<nav aria-label="主导航"><a href="./">Zhongyuan Zou</a><a href="#featured">精选作品</a><a href="#prototypes">工程原型</a><a href="#research">研究记录</a><a href="https://github.com/Zou-Zhongyuan">GitHub</a></nav>
+<main>
+<header><h1>作品档案</h1><p>推荐系统评测、后端工作流与智能体实验。项目使用 AI 辅助开发，下面列出已经留下的验证证据。</p></header>
+<section id="featured" aria-labelledby="featured-title">
+<h2 id="featured-title">精选作品</h2>
+<div class="grid">
+<article id="ranklab"><h3>RankLab</h3><p>同一套重排在 MovieLens 1M 全候选评测把 NDCG@10 从 0.26695 提到 0.28819，换成抽样候选后从 0.76598 降到 0.72407。</p><p>按全局时间切分训练、验证和测试。结果取 3 个种子、每个种子 1,486 名用户的均值。案例解释候选池、重排和离线结果的适用范围。</p><p><a href="./#article-rank-inversion">读案例</a> · <a href="./#ranklab">探索图表</a></p></article>
+<article id="checkout"><h3>Campus Checkout</h3><p>把校园外卖课程设计里的结账流程提炼为可执行的 Python 状态机，将订单履约与资金状态拆开。</p><p>16 项单元测试覆盖拒单退款、重复事件、不同载荷复用事件 ID 和错序回调。公开仓库提供独立示例。</p><p><a href="https://github.com/Zou-Zhongyuan/campus-checkout-workflow">源码与测试</a> · <a href="./#article-payment-acceptance">读设计笔记</a></p></article>
+</div>
+</section>
+<section id="prototypes" aria-labelledby="prototype-title">
+<h2 id="prototype-title">工程原型</h2>
+<div class="grid">
+<article id="memory"><h3>AgentMemoryLab</h3><p>68 道合成题对比 4 种记忆检索方法。用 LongMemEval_S 前 60 题的 2,913 个会话比较启发式和真实 tokenizer 计数。完整官方检索评测和端到端问答待完成。</p><p><a href="./#agentmemorylab">实验详情</a></p></article>
+<article id="workflow"><h3>ForgePilot</h3><p>演示预算控制、审批门禁和运行状态。完成前端构建，已有 20 项后端测试记录。执行轨迹来自模拟模型，真实模型、Docker 与 PostgreSQL 联调待完成。</p><p><a href="./#forgepilot">工作流详情</a></p></article>
+<article id="tools"><h3>ToolForge</h3><p>120 道有状态组合任务用参考策略和空动作反例核验评分流程。真实模型对照和训练待完成。</p><p><a href="./#toolforge">评测协议</a></p></article>
+</div>
+</section>
+<section id="research" aria-labelledby="research-title">
+<h2 id="research-title">研究记录</h2>
+<div class="grid">
+<article><h3>软件工程智能体综述</h3><p>未投稿草稿包含筛选账本和 21 条纳入记录。全文核验覆盖部分条目，独立双人筛选待完成。</p><p><a href="./#agent-review">综述详情</a></p></article>
+<article><h3>技术与岗位调研</h3><p>2026 年 11 月 18 日的调研快照，覆盖 46 条岗位核验记录与 6 个技术主题。</p><p><a href="./#career-research">调研详情</a></p></article>
+</div>
+</section>
+</main>
+</body>
+</html>

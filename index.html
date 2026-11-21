@@ -1276,7 +1276,7 @@
       <nav class="nav-links" aria-label="主导航">
         <a href="#ranklab">排序反转</a>
         <a href="#interactive-labs">系统实验台</a>
-        <a href="#projects">全部工程</a>
+        <a href="projects.html">作品档案</a>
         <a href="#writing">技术笔记</a>
         <a href="https://github.com/Zou-Zhongyuan" target="_blank" rel="noopener">GitHub ↗</a>
         <button type="button" class="theme-pill" id="theme-toggle" aria-label="切换明暗外观">
@@ -1599,7 +1599,8 @@
     <section class="chapter" id="projects" aria-labelledby="proj-heading">
       <header class="chapter-head reveal-item">
         <p class="eyebrow">Systems &amp; Research Portfolio</p>
-        <h2 id="proj-heading">七项工程。<br><span class="tone-muted">全部基于可复算证据。</span></h2>
+        <h2 id="proj-heading">项目与研究记录</h2>
+        <p><a href="projects.html">查看精选案例、工程原型和研究记录 ↗</a></p>
       </header>
 
       <search aria-label="按领域筛选工程卡片">
@@ -1794,7 +1795,7 @@
           <h4>一、反转机理：抽样协议把「头部精排」扭曲成了「粗粒度召回」</h4>
           <p>为直观展示均匀负采样如何压缩全库排位，先看一个简化的<strong>单正例教学示例</strong>：设可用候选池总数为 <code>N</code>（剔除用户截至 <code>T_dev</code> 已评分影片），若仅对 1 个正例均匀无放回抽取 99 个负例，全库真实排位 <code>r</code>（<code>1 ≤ r ≤ N</code>）对应的期望抽样排位为：</p>
           <div class="formula-box">E[r_sampled] = 1 + 99 × (r - 1) / (N - 1)   （单正例 1+99 教学示例）</div>
-          <p>在 RankLab 真实实现的 <code>sampled_100</code> 协议（全部可用未见正例 + 至多 99 个负例，之后按 <code>M = 100</code> 截取）中，多正例用户的候选池同样把大规模未看负例压缩至至多 99 个，因此具有完全一致的头部排位压缩效应（Krichene &amp; Rendle, KDD 2020）。代入 MovieLens 1M 的可用目录规模 <code>N = 3,669</code>（<code>ml-latest-small</code> 为 <code>N = 8,187</code>）即可看出扭曲根源：</p>
+          <p>在 RankLab 真实实现的 <code>sampled_100</code> 协议（全部可用未见正例 + 至多 99 个负例，之后按 <code>M = 100</code> 截取）中，多正例用户的候选池同样把大规模未看负例压缩至至多 99 个，因此也可能出现排位压缩（Krichene &amp; Rendle, KDD 2020）。代入 MovieLens 1M 的可用目录规模 <code>N = 3,669</code>（<code>ml-latest-small</code> 为 <code>N = 8,187</code>）即可看出扭曲根源：</p>
           <ul class="essay-list">
             <li><strong>头部压缩失真（教学示例直觉）</strong>：在 <code>N = 3,669</code> 的单正例示例下，全库仅排在第 <strong>r = 38</strong> 名的物品，进入抽样池后的期望排位约为 <strong>r_samp ≈ 2.0</strong>；即便全库跌至 <strong>r = 335</strong> 名，期望排位仍在第 10 名附近。真实 <code>sampled_100</code> 协议同样大幅削弱了负例竞争密度。</li>
             <li><strong>两阶段重排反转（<code>BPR-MF + HistGBDTRerank</code> vs <code>BPR-MF</code>）</strong>：全候选 <code>NDCG@10</code> 奖励将正例从第 20–100 名精准推入前 10 名的头部排序分辨力，因此 <code>HistGBDTRerank</code> 在 <code>ml-1m</code> 全候选下将 <code>BPR-MF</code> 从 <code>0.26695</code>（#5）显著提升至 <code>0.28819</code>（#2，<strong>+7.96%</strong>，<code>p &lt; 0.001</code>）。但抽样 <code>NDCG@10</code> 实质退化为衡量全库约 Top-370 的粗排覆盖；仅对 Top-100 候选做非线性分裂重排的树模型引入了局部打分方差，在 <code>Sampled-100</code> 中反而跌至 <code>0.72407</code>（#6），显著落后于未重排的 <code>BPR-MF</code>（<code>0.76598</code>，#2，<strong>-5.47%</strong>，<code>p &lt; 0.001</code>）。</li>
