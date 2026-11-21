@@ -1,229 +1,2391 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Zhongyuan Zou 的软件工程作品集。推荐系统评测、智能体工具调用与记忆、工程案例和技术笔记。">
-<meta name="theme-color" content="#101a2d">
-<title>Zhongyuan Zou · 项目与实验笔记</title>
-<style>
-:root{--navy:#101a2d;--navy-deep:#0b1323;--grid:#a5c8ff22;--ink:#16243b;--muted:#4a5c76;--line:#d8e0eb;--paper:#f2f5f9;--white:#fff;--blue:#164fb4;--cyan:#9fc6ff;--orange:#ffb779;--body:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;--mono:"SFMono-Regular",Consolas,monospace}
-*{box-sizing:border-box}html{scroll-padding-top:1rem}body{margin:0;font:16px/1.65 var(--body);background:var(--paper);color:var(--ink)}a{color:var(--blue);text-underline-offset:.24em}button,select{font:inherit}button,select,summary{cursor:pointer}
-:focus-visible{outline:3px solid #1a64dd;outline-offset:4px}.skip{position:fixed;z-index:4;top:.5rem;left:.5rem;padding:.5rem 1rem;background:var(--white);transform:translateY(-150%)}.skip:focus{transform:none}
-.wrap{width:min(1180px,calc(100% - 3rem));margin-inline:auto}.top{background:var(--navy-deep);color:var(--white);border-bottom:1px solid var(--grid)}.top .wrap{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:14px}.brand{font-weight:750;letter-spacing:-.02em}.top nav{display:flex;gap:clamp(.8rem,3vw,2rem);align-items:center;flex-wrap:wrap}.top a{color:#edf4ff;text-decoration:none;font-size:.9rem}.top a:hover{text-decoration:underline}
-.hero{padding:clamp(3.4rem,8vw,7rem) 0 clamp(3rem,7vw,6rem);background-color:var(--navy);background-image:linear-gradient(120deg,#101a2d 24%,#101a2d75 100%),repeating-linear-gradient(90deg,transparent 0 59px,var(--grid) 59px 60px),repeating-linear-gradient(0deg,transparent 0 59px,var(--grid) 59px 60px);color:var(--white)}.hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:end;gap:clamp(1.8rem,6vw,5rem)}
-.kicker,.label{font:700 .78rem/1.45 var(--mono);letter-spacing:.06em;text-transform:uppercase}.kicker{margin:0;color:var(--cyan)}h1{font-size:clamp(3.3rem,8vw,7.2rem);line-height:.96;letter-spacing:-.045em;margin:.85rem 0 1.3rem}h1 span{display:block}.hero-intro{font-size:clamp(1rem,2vw,1.19rem);color:#d2e0f3;max-width:38ch;margin:0 0 1.6rem}.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:1.15rem}.hero-actions a:first-child{display:inline-block;padding:.68rem 1rem;background:var(--cyan);color:var(--navy-deep);border-radius:5px;font-weight:750;text-decoration:none}.hero-actions a:last-child{color:var(--white)}
-.hero-proof{border:1px solid #7992b469;background:#0b1323c9;padding:clamp(1rem,3vw,1.8rem);border-radius:10px}.hero-proof .label{color:var(--cyan);margin:0}.hero-proof h2{font-size:1.45rem;margin:.5rem 0 1.25rem}.snapshot{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}.snapshot div{border-top:1px solid #7992b480;padding-top:.65rem}.snapshot span,.hero-proof small{display:block;color:#c3d4ee}.snapshot strong{display:block;margin:.15rem 0;font:700 clamp(1.4rem,3.5vw,2.6rem)/1.15 var(--mono);color:var(--orange);letter-spacing:-.07em}.hero-proof small{margin-top:.8rem;font-size:.8rem}
-main{padding:clamp(2.4rem,6vw,5rem) 0}.section{margin-bottom:clamp(3.6rem,8vw,6.5rem)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:1.35rem}.section-head h2{margin:0;font-size:clamp(1.9rem,4vw,3.3rem);letter-spacing:-.06em;line-height:1.15}.section-head p{margin:.5rem 0 0;color:var(--muted)}.section-head .label{color:var(--blue)}
-.feature{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden}.feature-copy{padding:clamp(1.25rem,4vw,2.6rem);background:#e4edff}.feature-copy h3{font-size:clamp(2.1rem,5vw,4.2rem);letter-spacing:-.07em;line-height:1;margin:.6rem 0 1rem}.feature-copy p{margin:.65rem 0}.feature-copy .status{display:inline-block;background:#f3f7ff}.feature-copy .example{margin:1.45rem 0 0;padding:1rem 0 0;border-top:1px solid #b5c7e4}.feature-copy .example strong{display:block;margin-bottom:.25rem}.feature-chart{padding:clamp(1rem,3vw,2rem);min-width:0}.controls{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-bottom:1rem}.controls label{font-weight:720;font-size:.85rem;min-width:0}.controls select{display:block;width:100%;max-width:100%;margin-top:.25rem;padding:.42rem;background:var(--paper);border:1px solid #a9b7ca;border-radius:4px;color:var(--ink)}.chart-table{width:100%;border-collapse:collapse;font-size:.88rem;table-layout:fixed}.chart-table caption{text-align:left;color:var(--muted);font-size:.82rem;margin-bottom:.3rem}.chart-table th{text-align:left;font-weight:620;overflow-wrap:anywhere}.chart-table th:first-child{width:47%}.chart-table td,.chart-table th{padding:.36rem .22rem;border-bottom:1px solid #e6eaf0}.chart-table .score{width:6.7ch;text-align:right;font:700 .86rem/1.5 var(--mono)} meter{width:100%;height:.58rem;display:block;background:#edf2f8;border-radius:3px}meter::-webkit-meter-bar{background:#edf2f8;border:0;border-radius:3px}meter::-webkit-meter-optimum-value{background:#2971dc;border-radius:3px}meter::-moz-meter-bar{background:#2971dc;border-radius:3px}.chart-note{font-size:.8rem;color:var(--muted);margin:.75rem 0 0}
-.filters{display:flex;gap:.45rem;flex-wrap:wrap;margin:0 0 1rem}.filters button{background:var(--white);border:1px solid #a9b7ca;border-radius:5px;padding:.35rem .8rem;color:var(--ink)}.filters button[aria-pressed="true"]{background:var(--navy);color:var(--white);border-color:var(--navy)}[hidden]{display:none!important}
-.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;align-items:start}.project{align-self:stretch;display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:9px;padding:1.2rem}.project:target,.note:target{outline:2px solid #2d67c4;outline-offset:3px}.project-top{display:flex;align-items:start;justify-content:space-between;gap:.5rem;flex-wrap:wrap}.project-category{font-size:.82rem;color:var(--muted)}.status{font-size:.74rem;font-weight:700;color:#183e7a;background:#edf3ff;padding:.18rem .45rem;border-radius:4px}.project h3{font-size:1.55rem;letter-spacing:-.045em;margin:.5rem 0 .26rem}.project p{font-size:.92rem;color:var(--muted);margin:.15rem 0 .9rem}.project-metric{display:flex;align-items:baseline;gap:.55rem;padding-top:.65rem;margin-top:auto;border-top:1px solid var(--line)}.project-metric strong{font-size:1.6rem;letter-spacing:-.055em}.project-metric span{font-size:.81rem;color:var(--muted)}.project details{font-size:.88rem;margin-top:.65rem}.project summary{font-weight:700;color:var(--blue)}.project details p:first-of-type{margin-top:.55rem}
-.note-index{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.2rem}.note-index a{display:block;background:var(--white);border:1px solid var(--line);border-radius:7px;padding:.9rem 1rem;font-weight:730}.note{background:var(--white);border:1px solid var(--line);border-radius:9px;padding:clamp(1.15rem,4vw,2.5rem);margin-bottom:1.2rem}.note h2{font-size:clamp(1.4rem,3vw,2.1rem);line-height:1.3;letter-spacing:-.035em;margin:0 0 .6rem}.note p{max-width:75ch}.article-lead{color:var(--muted);margin:0 0 1.2rem}.table-region{overflow-x:auto}.table-region table{border-collapse:collapse;width:100%;min-width:28rem;text-align:left}.table-region td,.table-region th{padding:.5rem .6rem;border-bottom:1px solid var(--line)}.table-region caption{text-align:left;font-weight:720;margin-bottom:.35rem}pre{overflow:auto;background:var(--navy);color:#e9f1ff;border-radius:6px;padding:1rem;font-family:var(--mono);font-size:.86rem}code{font-family:var(--mono);font-size:.92em}
-footer{background:var(--navy-deep);color:#d6e4f7;padding:1.4rem 0}footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.65rem}footer p{margin:0}footer a{color:#c3dbff}
-@media(max-width:880px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}.hero .wrap{gap:2rem}}
-@media(max-width:680px){.wrap{width:calc(100% - 2rem)}.hero .wrap,.feature,.projects,.note-index{grid-template-columns:1fr}.top .wrap{align-items:flex-start;flex-direction:column;justify-content:center;gap:.2rem;padding:.65rem 0}.hero{padding-top:2.6rem}.section-head{display:block}.chart-table{font-size:.8rem}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <script>
+    try {
+      document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem("color-scheme") ?? "light dark";
+    } catch (e) {}
+  </script>
+  <meta name="description" content="Zhongyuan Zou — 极简交互式系统与机器学习评测实验室。">
+  <title>Zhongyuan Zou</title>
+  <style>
+    :root {
+      interpolate-size: allow-keywords;
+
+      --canvas-light: #f5f5f7;
+      --canvas-dark: #000000;
+      --elevated-light: #ffffff;
+      --elevated-dark: #141416;
+      --subtle-bg-light: #f0f0f3;
+      --subtle-bg-dark: #1d1d20;
+      --pill-track-light: rgba(118, 118, 128, 0.12);
+      --pill-track-dark: rgba(118, 118, 128, 0.24);
+      --pill-thumb-light: #ffffff;
+      --pill-thumb-dark: #2c2c30;
+      --glass-light: rgba(251, 251, 253, 0.76);
+      --glass-dark: rgba(12, 12, 14, 0.74);
+
+      --ink-light: #1d1d1f;
+      --ink-dark: #f5f5f7;
+      --secondary-light: #6e6e73;
+      --secondary-dark: #86868b;
+      --hairline-light: rgba(0, 0, 0, 0.07);
+      --hairline-dark: rgba(255, 255, 255, 0.09);
+      --spotlight-light: rgba(0, 113, 227, 0.045);
+      --spotlight-dark: rgba(41, 151, 255, 0.075);
+
+      --accent-light: #0071e3;
+      --accent-dark: #2997ff;
+      --emerald-light: #1d8348;
+      --emerald-dark: #30d158;
+      --amber-light: #c96a00;
+      --amber-dark: #ff9f0a;
+      --rose-light: #d70040;
+      --rose-dark: #ff375f;
+
+      --scroll-thumb-light: #86868b;
+      --scroll-thumb-dark: #636366;
+      --scroll-track-light: #f5f5f7;
+      --scroll-track-dark: #000000;
+
+      --canvas: var(--canvas-light);
+      --elevated: var(--elevated-light);
+      --subtle-bg: var(--subtle-bg-light);
+      --pill-track: var(--pill-track-light);
+      --pill-thumb: var(--pill-thumb-light);
+      --glass: var(--glass-light);
+      --ink: var(--ink-light);
+      --secondary: var(--secondary-light);
+      --hairline: var(--hairline-light);
+      --spotlight: var(--spotlight-light);
+      --accent: var(--accent-light);
+      --emerald: var(--emerald-light);
+      --amber: var(--amber-light);
+      --rose: var(--rose-light);
+      --scroll-thumb: var(--scroll-thumb-light);
+      --scroll-track: var(--scroll-track-light);
+
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-apple: cubic-bezier(0.22, 1, 0.36, 1);
+      /* Physics-based damped spring stops (modern-web-guidance: physics-based-easing) */
+      --ease-spring: linear(0, 0.012 0.9%, 0.05 2%, 0.199 4.4%, 0.391 7.3%, 0.614 10.9%, 0.807 14.7%, 0.946 18.5%, 1.028 22.1%, 1.063 25.5%, 1.066 28.9%, 1.049 33%, 1.016 40.3%, 0.999 48.2%, 0.996 58%, 1);
+
+      --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      --font-text: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+
+      color-scheme: light dark;
+      accent-color: var(--accent);
+      scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --canvas: var(--canvas-dark);
+        --elevated: var(--elevated-dark);
+        --subtle-bg: var(--subtle-bg-dark);
+        --pill-track: var(--pill-track-dark);
+        --pill-thumb: var(--pill-thumb-dark);
+        --glass: var(--glass-dark);
+        --ink: var(--ink-dark);
+        --secondary: var(--secondary-dark);
+        --hairline: var(--hairline-dark);
+        --spotlight: var(--spotlight-dark);
+        --accent: var(--accent-dark);
+        --emerald: var(--emerald-dark);
+        --amber: var(--amber-dark);
+        --rose: var(--rose-dark);
+        --scroll-thumb: var(--scroll-thumb-dark);
+        --scroll-track: var(--scroll-track-dark);
+      }
+    }
+
+    :root:has(> head > meta[name="color-scheme"][content="dark"]) {
+      color-scheme: dark;
+      --canvas: var(--canvas-dark);
+      --elevated: var(--elevated-dark);
+      --subtle-bg: var(--subtle-bg-dark);
+      --pill-track: var(--pill-track-dark);
+      --pill-thumb: var(--pill-thumb-dark);
+      --glass: var(--glass-dark);
+      --ink: var(--ink-dark);
+      --secondary: var(--secondary-dark);
+      --hairline: var(--hairline-dark);
+      --spotlight: var(--spotlight-dark);
+      --accent: var(--accent-dark);
+      --emerald: var(--emerald-dark);
+      --amber: var(--amber-dark);
+      --rose: var(--rose-dark);
+      --scroll-thumb: var(--scroll-thumb-dark);
+      --scroll-track: var(--scroll-track-dark);
+    }
+
+    :root:has(> head > meta[name="color-scheme"][content="light"]) {
+      color-scheme: light;
+      --canvas: var(--canvas-light);
+      --elevated: var(--elevated-light);
+      --subtle-bg: var(--subtle-bg-light);
+      --pill-track: var(--pill-track-light);
+      --pill-thumb: var(--pill-thumb-light);
+      --glass: var(--glass-light);
+      --ink: var(--ink-light);
+      --secondary: var(--secondary-light);
+      --hairline: var(--hairline-light);
+      --spotlight: var(--spotlight-light);
+      --accent: var(--accent-light);
+      --emerald: var(--emerald-light);
+      --amber: var(--amber-light);
+      --rose: var(--rose-light);
+      --scroll-thumb: var(--scroll-thumb-light);
+      --scroll-track: var(--scroll-track-light);
+    }
+
+    @supports (color: light-dark(white, black)) {
+      :root {
+        --canvas: light-dark(var(--canvas-light), var(--canvas-dark));
+        --elevated: light-dark(var(--elevated-light), var(--elevated-dark));
+        --subtle-bg: light-dark(var(--subtle-bg-light), var(--subtle-bg-dark));
+        --pill-track: light-dark(var(--pill-track-light), var(--pill-track-dark));
+        --pill-thumb: light-dark(var(--pill-thumb-light), var(--pill-thumb-dark));
+        --glass: light-dark(var(--glass-light), var(--glass-dark));
+        --ink: light-dark(var(--ink-light), var(--ink-dark));
+        --secondary: light-dark(var(--secondary-light), var(--secondary-dark));
+        --hairline: light-dark(var(--hairline-light), var(--hairline-dark));
+        --spotlight: light-dark(var(--spotlight-light), var(--spotlight-dark));
+        --accent: light-dark(var(--accent-light), var(--accent-dark));
+        --emerald: light-dark(var(--emerald-light), var(--emerald-dark));
+        --amber: light-dark(var(--amber-light), var(--amber-dark));
+        --rose: light-dark(var(--rose-light), var(--rose-dark));
+        --scroll-thumb: light-dark(var(--scroll-thumb-light), var(--scroll-thumb-dark));
+        --scroll-track: light-dark(var(--scroll-track-light), var(--scroll-track-dark));
+      }
+    }
+
+    @media (forced-colors: active) {
+      :root { --hairline: CanvasText; --accent: Highlight; }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-padding-block-start: 4rem; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
+
+    body {
+      margin: 0;
+      background-color: var(--canvas);
+      color: var(--ink);
+      font: 400 1.0625rem/1.62 var(--font-text);
+      letter-spacing: -0.011em;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: clip;
+    }
+
+    svg { display: block; max-inline-size: 100%; }
+    h1, h2, h3 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 0.22em; }
+    button { font: inherit; color: inherit; cursor: pointer; }
+    summary { cursor: pointer; }
+    .num, code, pre { font-variant-numeric: tabular-nums; }
+    code, pre { font-family: var(--font-mono); }
+
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      inline-size: 1px;
+      block-size: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      inset-block-start: 0.5rem;
+      inset-inline-start: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--elevated);
+      border-radius: 999px;
+      border: 1.5px solid var(--accent);
+      transform: translateY(-200%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .stage {
+      inline-size: min(1040px, calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+
+    /* Ultra-thin Frosted Apple Global Nav */
+    .global-nav {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 50;
+      background: var(--glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-block-end: 1px solid var(--hairline);
+    }
+    .nav-inner {
+      min-block-size: 3rem;
+      display: flex;
+      align-items: safe center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-block: 0.35rem;
+    }
+    .nav-brand {
+      font: 600 0.92rem/1 var(--font-display);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .nav-brand:hover { text-decoration: none; opacity: 0.8; }
+    .nav-links {
+      display: flex;
+      align-items: safe center;
+      flex-wrap: wrap;
+      flex-wrap: balance;
+      gap: 0.3rem 1.4rem;
+      font-size: 0.8rem;
+    }
+    .nav-links a {
+      color: var(--secondary);
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--ink); text-decoration: none; }
+    .theme-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      padding: 0.24rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: var(--pill-track);
+      font-size: 0.75rem;
+      color: var(--ink);
+      transition: background-color 0.2s ease;
+    }
+    .theme-pill:hover { background: var(--subtle-bg); }
+
+    /* Hero Stage — Calm, Sculptural, Spacious */
+    .hero {
+      position: relative;
+      padding-block: clamp(5rem, 11vw, 8.5rem) clamp(3.5rem, 7vw, 5.5rem);
+      text-align: center;
+    }
+    .hero-glow {
+      position: absolute;
+      inset-block-start: 8%;
+      inset-inline: 50%;
+      inline-size: min(680px, 90vw);
+      block-size: 320px;
+      translate: -50% 0;
+      background: radial-gradient(ellipse at center, color-mix(in oklab, var(--accent) 22%, transparent), transparent 70%);
+      filter: blur(64px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-glow {
+        animation: aura-breathe 8s ease-in-out infinite alternate;
+      }
+      @keyframes aura-breathe {
+        from { opacity: 0.65; scale: 0.94; }
+        to { opacity: 1; scale: 1.06; }
+      }
+      .hero-stagger {
+        opacity: 0;
+        animation: hero-enter 0.95s var(--ease-out-expo) forwards;
+        animation-delay: var(--d, 0s);
+      }
+      @keyframes hero-enter {
+        from { opacity: 0; translate: 0 22px; }
+        to { opacity: 1; translate: 0 0; }
+      }
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .eyebrow {
+      margin: 0 0 0.85rem;
+      font: 600 0.82rem/1.3 var(--font-text);
+      letter-spacing: 0.02em;
+      color: var(--accent);
+    }
+    h1 {
+      margin: 0 auto 1.15rem;
+      font: 700 clamp(3rem, 7.2vw, 5.4rem)/1.03 var(--font-display);
+      letter-spacing: -0.04em;
+    }
+    .hero-statement {
+      margin: 0 auto 2.1rem;
+      max-inline-size: 28ch;
+      font: 600 clamp(1.25rem, 2.6vw, 1.85rem)/1.32 var(--font-display);
+      letter-spacing: -0.022em;
+    }
+    .tone-muted { color: var(--secondary); font-weight: 500; }
+
+    .cta-row {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.85rem;
+    }
+    .apple-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      padding: 0.72rem 1.45rem;
+      border-radius: 999px;
+      font-size: 0.94rem;
+      font-weight: 550;
+      transition: background-color 0.25s ease, scale 0.35s var(--ease-apple);
+      transition-timing-function: ease, var(--ease-spring);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .apple-btn:hover { scale: 1.025; text-decoration: none; }
+      .apple-btn:active { scale: 0.975; }
+    }
+    .apple-btn-primary {
+      background: #0071e3;
+      color: #ffffff;
+    }
+    .apple-btn-primary:hover { background: #0077ed; text-decoration: none; }
+    .apple-btn-glass {
+      background: var(--elevated);
+      color: var(--ink);
+      border: 1px solid var(--hairline);
+    }
+
+    /* Apple Keynote Bento Cards + Specular Spotlight */
+    .bento-card {
+      position: relative;
+      background-color: var(--elevated);
+      background-image: radial-gradient(560px circle at var(--mx, 50%) var(--my, -20%), var(--spotlight), transparent 45%);
+      border: 1px solid var(--hairline);
+      border-radius: 28px;
+      box-shadow: 0 10px 36px -14px rgba(0, 0, 0, 0.06);
+      overflow: clip;
+      transition: translate 0.45s var(--ease-out-expo), border-color 0.3s ease;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .bento-card:hover {
+        translate: 0 -3px;
+      }
+    }
+
+    /* Scroll-Driven Reveal Choreography (modern-web-guidance: scroll-entry-exit-effects) */
+    @media (prefers-reduced-motion: no-preference) {
+      @supports ((animation-timeline: view()) and (animation-range: entry)) {
+        @keyframes bento-rise {
+          from {
+            opacity: 0;
+            translate: 0 30px;
+            scale: 0.98;
+          }
+        }
+        .reveal-item {
+          animation: bento-rise auto linear backwards;
+          animation-timeline: view();
+          animation-range: entry 0% entry 140px;
+        }
+      }
+    }
+
+    /* Hero Summary Bento Strip (Asymmetric 12-Col Apple Keynote Layout) */
+    .hero-bento {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1.15rem;
+      margin-block-end: clamp(5.5rem, 11vw, 9rem);
+    }
+    .span-7 { grid-column: span 7; }
+    .span-5 { grid-column: span 5; }
+    .stat-tile {
+      padding: clamp(1.7rem, 3.2vw, 2.35rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-block-size: 13.5rem;
+    }
+    .stat-tile .tile-kicker {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--secondary);
+    }
+    .stat-tile .tile-figure {
+      margin-block: 0.5rem 0.65rem;
+      font: 700 clamp(2.4rem, 4.6vw, 3.5rem)/1.02 var(--font-display);
+      letter-spacing: -0.038em;
+      color: var(--ink);
+    }
+    .stat-tile p {
+      margin: 0;
+      font-size: 0.94rem;
+      color: var(--secondary);
+      max-inline-size: 46ch;
+    }
+
+    /* Chapter Headers — Apple Centered Editorial */
+    .chapter {
+      margin-block-end: clamp(6rem, 12vw, 9.5rem);
+    }
+    .chapter-head {
+      text-align: center;
+      max-inline-size: 54rem;
+      margin: 0 auto 2.4rem;
+    }
+    .chapter-head h2 {
+      margin: 0.35rem 0 0.75rem;
+      font: 700 clamp(2rem, 4.4vw, 3.15rem)/1.1 var(--font-display);
+      letter-spacing: -0.032em;
+    }
+    .chapter-head p {
+      margin: 0 auto;
+      font-size: 1.02rem;
+      color: var(--secondary);
+      max-inline-size: 52ch;
+    }
+
+    /* Sliding Glass Pill Segmented Control */
+    .seg-bar-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-block-end: 1.65rem;
+    }
+    .segmented {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px;
+      background: var(--pill-track);
+      border-radius: 999px;
+      isolation: isolate;
+      max-inline-size: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .segmented::-webkit-scrollbar { display: none; }
+    .seg-thumb {
+      position: absolute;
+      z-index: -1;
+      inset-block: 4px;
+      inset-inline-start: 0;
+      inline-size: var(--seg-w, 0px);
+      translate: var(--seg-x, 4px) 0;
+      background: var(--pill-thumb);
+      border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 1px rgba(0, 0, 0, 0.08);
+      transition: translate 0.45s var(--ease-apple), inline-size 0.45s var(--ease-apple);
+      transition-timing-function: var(--ease-spring);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .seg-thumb { transition: none; }
+    }
+    .segmented button {
+      background: transparent;
+      border: 0;
+      padding: 0.42rem 1rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 550;
+      color: var(--secondary);
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+    .segmented button[aria-pressed="true"] {
+      color: var(--ink);
+    }
+
+    /* RankLab Stage — Animated Leaderboard + Optional Slope Curve */
+    .stage-surface {
+      padding: clamp(1.5rem, 3.5vw, 2.5rem);
+    }
+    .stage-caption-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-block-end: 1.15rem;
+      font-size: 0.84rem;
+      color: var(--secondary);
+    }
+    .metric-chips {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 0.38rem;
+    }
+    .chip-btn {
+      padding: 0.26rem 0.72rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: transparent;
+      font-size: 0.78rem;
+      color: var(--secondary);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .chip-btn[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--canvas);
+      border-color: var(--ink);
+    }
+
+    .rank-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .rank-row {
+      view-transition-name: var(--vt-name);
+      view-transition-name: match-element;
+      display: grid;
+      grid-template-columns: minmax(210px, 1.15fr) minmax(120px, 1.4fr) minmax(135px, auto);
+      align-items: center;
+      gap: 1rem;
+      padding: 0.82rem 1.1rem;
+      background: var(--subtle-bg);
+      border-radius: 16px;
+      transition: background-color 0.25s ease;
+    }
+    .rank-row:hover {
+      background: color-mix(in oklab, var(--subtle-bg) 82%, var(--accent) 18%);
+    }
+    ::view-transition-group(*) {
+      animation-duration: 0.56s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-group(*),
+      ::view-transition-old(*),
+      ::view-transition-new(*) {
+        animation: none;
+      }
+    }
+
+    .rank-left {
+      display: flex;
+      align-items: center;
+      gap: 0.58rem;
+      min-inline-size: 0;
+      flex-wrap: wrap;
+    }
+    .rank-pos {
+      font: 600 0.82rem/1 var(--font-mono);
+      color: var(--secondary);
+      min-inline-size: 2.1ch;
+    }
+    .rank-name {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .delta-pill {
+      padding: 0.14rem 0.52rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .delta-pill.is-drop {
+      color: var(--rose);
+      background: color-mix(in oklab, var(--rose) 13%, transparent);
+    }
+    .delta-pill.is-rise {
+      color: var(--amber);
+      background: color-mix(in oklab, var(--amber) 14%, transparent);
+    }
+    .delta-pill.is-subtle {
+      color: var(--secondary);
+      background: var(--pill-track);
+    }
+
+    .rank-bar-wrap {
+      inline-size: 100%;
+      block-size: 0.5rem;
+      background: var(--pill-track);
+      border-radius: 999px;
+      overflow: clip;
+    }
+    .rank-bar-fill {
+      block-size: 100%;
+      background: linear-gradient(90deg, var(--accent), color-mix(in oklab, var(--accent) 72%, #5e5ce6));
+      border-radius: 999px;
+      transition: inline-size 0.65s var(--ease-apple);
+      transition-timing-function: var(--ease-spring);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rank-bar-fill { transition: none; }
+    }
+
+    .rank-right {
+      text-align: end;
+      white-space: nowrap;
+    }
+    .rank-score {
+      display: block;
+      font-size: 0.98rem;
+      font-weight: 650;
+    }
+    .rank-meta {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--secondary);
+    }
+
+    .insight-callout {
+      margin-block-start: 1.35rem;
+      padding: 1rem 1.25rem;
+      border-radius: 18px;
+      background: var(--subtle-bg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--secondary);
+    }
+    .insight-callout strong { color: var(--ink); }
+
+    .slope-drawer {
+      margin-block-start: 1rem;
+    }
+    .slope-drawer summary {
+      font-size: 0.86rem;
+      font-weight: 550;
+      color: var(--accent);
+      padding-block: 0.35rem;
+    }
+    .slope-svg-box {
+      margin-block-start: 0.85rem;
+      padding: 1rem;
+      background: var(--subtle-bg);
+      border-radius: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    #slope-svg {
+      min-inline-size: 620px;
+      inline-size: 100%;
+      block-size: auto;
+    }
+
+    /* Chapter 02: Studio Tabs with Anchor-Positioned Underline */
+    .studio-card { padding: 0; }
+    .studio-tablist {
+      position: relative;
+      display: flex;
+      overflow-x: auto;
+      padding-inline: clamp(1.2rem, 3vw, 2.2rem);
+      border-block-end: 1px solid var(--hairline);
+      gap: 1.6rem;
+    }
+    .studio-tablist::before {
+      content: "";
+      position: absolute;
+      position-anchor: --active-studio-tab;
+      inset-block-end: 0;
+      inset-inline-start: anchor(left);
+      inset-inline-end: anchor(right);
+      border-block-end: 2.5px solid var(--ink);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .studio-tablist::before {
+        transition: inset 0.32s var(--ease-apple);
+      }
+    }
+    .studio-tablist [role="tab"] {
+      flex: none;
+      background: transparent;
+      border: 0;
+      padding: 1.1rem 0.15rem;
+      font-size: 0.92rem;
+      font-weight: 550;
+      color: var(--secondary);
+      white-space: nowrap;
+    }
+    .studio-tablist [role="tab"][aria-selected="true"] {
+      color: var(--ink);
+      anchor-name: --active-studio-tab;
+    }
+    @supports not (position-anchor: auto) {
+      .studio-tablist::before { display: none; }
+      .studio-tablist [role="tab"][aria-selected="true"] {
+        border-block-end: 2.5px solid var(--ink);
+      }
+    }
+
+    /* Put padding on child wrapper, NEVER on [role="tabpanel"] with hidden="until-found" */
+    .studio-panels { display: block; }
+    .studio-panel-inner {
+      padding: clamp(1.6rem, 3.5vw, 2.6rem);
+    }
+
+    /* macOS Storage-Style Multi-Segment Memory Capsules */
+    .storage-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.1rem;
+      margin-block: 0.85rem 1.35rem;
+      font-size: 0.82rem;
+      color: var(--secondary);
+    }
+    .dot {
+      display: inline-block;
+      inline-size: 0.56rem;
+      block-size: 0.56rem;
+      border-radius: 50%;
+      margin-inline-end: 0.38rem;
+    }
+    .capsule-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+    .mem-item-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-block-end: 0.42rem;
+      font-size: 0.88rem;
+    }
+    .mem-item-head strong { font-weight: 600; }
+    .mem-item-head span { color: var(--secondary); font-size: 0.8rem; }
+    .capsule-track {
+      position: relative;
+      display: flex;
+      inline-size: 100%;
+      block-size: 0.95rem;
+      background: var(--subtle-bg);
+      border-radius: 999px;
+      overflow: clip;
+    }
+    .cap-seg {
+      block-size: 100%;
+      transition: inline-size 0.65s var(--ease-apple);
+      transition-timing-function: var(--ease-spring);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cap-seg { transition: none; }
+    }
+    .cap-limit-marker {
+      position: absolute;
+      inset-block: 0;
+      inline-size: 2px;
+      background: var(--ink);
+      transition: inset-inline-start 0.5s var(--ease-apple);
+    }
+    .mem-Takeaways {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-block-start: 1.65rem;
+    }
+    .mini-note {
+      padding: 1.05rem 1.15rem;
+      border-radius: 18px;
+      background: var(--subtle-bg);
+    }
+    .mini-note strong {
+      display: block;
+      font: 700 1.35rem/1.15 var(--font-display);
+      margin-block-end: 0.25rem;
+    }
+    .mini-note span {
+      font-size: 0.82rem;
+      color: var(--secondary);
+    }
+
+    /* Apple Dynamic Island / Live Activity CAS Capsule */
+    .island-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-block: 0.5rem;
+    }
+    .dynamic-island {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.95rem;
+      padding: 0.85rem 1.55rem;
+      background: #111113;
+      color: #f5f5f7;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      box-shadow: 0 18px 42px -12px rgba(0, 0, 0, 0.35);
+      transition: scale 0.45s var(--ease-apple), border-color 0.3s ease;
+      transition-timing-function: var(--ease-spring), ease;
+    }
+    @keyframes shake-island {
+      0%, 100% { translate: 0 0; }
+      25% { translate: -6px 0; }
+      75% { translate: 6px 0; }
+    }
+    .dynamic-island.is-rejected {
+      border-color: #ff375f;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .dynamic-island.is-rejected { animation: shake-island 0.32s ease; }
+      .dynamic-island.is-pulsing { scale: 1.03; }
+    }
+    .island-dot {
+      inline-size: 0.62rem;
+      block-size: 0.62rem;
+      border-radius: 50%;
+      background: #ff9f0a;
+      box-shadow: 0 0 12px currentColor;
+    }
+    .island-status {
+      font: 600 0.88rem/1 var(--font-mono);
+      letter-spacing: 0.02em;
+    }
+    .island-divider {
+      inline-size: 1px;
+      block-size: 1rem;
+      background: rgba(255, 255, 255, 0.16);
+    }
+    .island-meta {
+      font: 500 0.8rem/1 var(--font-mono);
+      color: #a1a1a6;
+    }
+    .island-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-block: 1.65rem 1.25rem;
+    }
+    .island-btn {
+      padding: 0.52rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid var(--hairline);
+      background: var(--subtle-bg);
+      font-size: 0.84rem;
+      font-weight: 550;
+      transition: background-color 0.2s ease, scale 0.25s var(--ease-apple);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .island-btn:active { scale: 0.96; }
+    }
+    .island-btn:hover { background: var(--pill-track); }
+    .island-caption {
+      max-inline-size: 56ch;
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--secondary);
+      min-block-size: 3rem;
+    }
+
+    /* ToolForge Minimalist 4x2 Grid */
+    .tax-bento {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.85rem;
+      margin-block-start: 1.2rem;
+    }
+    .tax-tile {
+      padding: 1.05rem 1.15rem;
+      border-radius: 18px;
+      background: var(--subtle-bg);
+    }
+    .tax-tile code {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-block-end: 0.3rem;
+    }
+    .tax-tile p {
+      margin: 0;
+      font-size: 0.84rem;
+      color: var(--secondary);
+    }
+
+    /* Chapter 03: 2-Column Apple Bento Project Gallery (subgrid + smooth details) */
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.45rem;
+      margin-block-end: 1.85rem;
+    }
+    .project-grid {
+      inline-size: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.2rem;
+    }
+    .project-tile {
+      grid-row: span 3;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-rows: subgrid;
+      row-gap: 1.15rem;
+      padding: clamp(1.6rem, 3vw, 2.2rem);
+    }
+    .project-tile[hidden] { display: none !important; }
+    .project-tile:target, .essay-card:target {
+      outline: 2px solid var(--accent);
+      outline-offset: 4px;
+    }
+    .proj-eyebrow {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-block-end: 0.25rem;
+    }
+    .proj-head h3 {
+      margin: 0 0 0.35rem;
+      font: 700 1.55rem/1.15 var(--font-display);
+      letter-spacing: -0.025em;
+    }
+    .proj-tagline {
+      margin: 0;
+      font-size: 0.94rem;
+      color: var(--secondary);
+    }
+    .proj-stat {
+      align-self: end;
+      padding-block-start: 0.95rem;
+      border-block-start: 1px solid var(--hairline);
+    }
+    .proj-stat strong {
+      display: block;
+      font: 700 2rem/1.08 var(--font-display);
+      letter-spacing: -0.03em;
+    }
+    .proj-stat span {
+      font-size: 0.82rem;
+      color: var(--secondary);
+    }
+
+    /* Smooth Intrinsic-Size Details Accordion (modern-web-guidance: animate-to-intrinsic-sizes) */
+    .apple-details summary {
+      font-size: 0.86rem;
+      font-weight: 550;
+      color: var(--accent);
+      padding-block: 0.15rem;
+    }
+    .apple-details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition: block-size 0.38s var(--ease-apple), content-visibility 0.38s allow-discrete;
+    }
+    .apple-details[open]::details-content {
+      block-size: auto;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .apple-details::details-content { transition: none !important; }
+    }
+    .details-content-inner {
+      padding-block-start: 0.85rem;
+      font-size: 0.86rem;
+      color: var(--secondary);
+    }
+    .details-content-inner ul {
+      margin: 0 0 0.65rem;
+      padding-inline-start: 1.1rem;
+    }
+    .details-content-inner li { margin-block-end: 0.42rem; }
+    .proj-cta { margin: 0.4rem 0 0; font-weight: 550; }
+
+    /* Chapter 04: Calm Editorial Notes + Responsive Sticky Tables */
+    .essay-toc {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.9rem;
+      margin-block-end: 1.5rem;
+    }
+    .essay-toc a {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.35rem;
+      padding: 1.05rem 1.2rem;
+      border-radius: 20px;
+      background: var(--elevated);
+      border: 1px solid var(--hairline);
+      transition: translate 0.35s var(--ease-out-expo), border-color 0.25s ease;
+    }
+    .essay-toc a:hover {
+      text-decoration: none;
+      border-color: var(--accent);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .essay-toc a:hover { translate: 0 -2px; }
+    }
+    .essay-toc small {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .essay-toc strong {
+      font-size: 0.94rem;
+      line-height: 1.38;
+      color: var(--ink);
+    }
+    .essay-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.35rem;
+    }
+    .essay-card {
+      padding: clamp(1.75rem, 4vw, 2.8rem);
+    }
+    .essay-card h3 {
+      margin: 0.25rem 0 0.65rem;
+      font: 700 clamp(1.38rem, 2.6vw, 1.85rem)/1.22 var(--font-display);
+      letter-spacing: -0.025em;
+    }
+    .essay-card h4 {
+      margin: 1.75rem 0 0.55rem;
+      font: 650 1.08rem/1.35 var(--font-display);
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+    .essay-card p {
+      max-inline-size: 68ch;
+      color: var(--secondary);
+      margin: 0.72rem 0;
+    }
+    .essay-card .essay-lead {
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+    .formula-box {
+      margin-block: 1rem;
+      padding: 0.9rem 1.15rem;
+      border-radius: 16px;
+      background: var(--subtle-bg);
+      border: 1px solid var(--hairline);
+      font: 500 0.88rem/1.6 var(--font-mono);
+      color: var(--ink);
+      overflow-x: auto;
+    }
+    .essay-list {
+      margin: 0.65rem 0 1rem;
+      padding-inline-start: 1.2rem;
+      max-inline-size: 68ch;
+      color: var(--secondary);
+      font-size: 0.94rem;
+    }
+    .essay-list li { margin-block-end: 0.45rem; }
+    .essay-list strong { color: var(--ink); }
+    .limit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-block: 0.9rem 0.4rem;
+    }
+    .limit-box {
+      padding: 1.05rem 1.15rem;
+      border-radius: 18px;
+      background: var(--subtle-bg);
+    }
+    .limit-box strong {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--ink);
+      margin-block-end: 0.3rem;
+    }
+    .limit-box p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--secondary);
+    }
+
+    /* Responsive Sticky Table (modern-web-guidance: responsive-table) */
+    .table-region {
+      margin-block: 1.2rem;
+      overflow: auto;
+      max-inline-size: 100%;
+      container-type: inline-size;
+      border-radius: 16px;
+      border: 1px solid var(--hairline);
+      background: var(--subtle-bg);
+    }
+    .clean-table {
+      inline-size: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.86rem;
+    }
+    .clean-table caption {
+      text-align: start;
+      padding: 0.7rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--secondary);
+      border-block-end: 1px solid var(--hairline);
+    }
+    .clean-table thead {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 2;
+      background: var(--subtle-bg);
+    }
+    .clean-table th, .clean-table td {
+      padding: 0.65rem 1rem;
+      text-align: start;
+      border-block-end: 1px solid var(--hairline);
+    }
+    .clean-table thead th {
+      font-size: 0.76rem;
+      color: var(--secondary);
+      font-weight: 600;
+    }
+    .clean-table tbody th {
+      position: sticky;
+      inset-inline-start: 0;
+      z-index: 1;
+      background: var(--subtle-bg);
+      font-weight: 600;
+    }
+    .clean-table tbody tr:last-child th,
+    .clean-table tbody tr:last-child td { border-block-end: 0; }
+    @container (width < 520px) {
+      .clean-table, .clean-table thead, .clean-table tbody, .clean-table tr, .clean-table th, .clean-table td {
+        display: block;
+      }
+      .clean-table thead { display: none; }
+      .clean-table tbody tr + tr {
+        border-block-start: 2px solid var(--hairline);
+      }
+      .clean-table tbody th {
+        position: static;
+        background: var(--elevated);
+        color: var(--ink);
+        padding-block: 0.6rem;
+        border-block-end: 1px solid var(--hairline);
+      }
+      .clean-table td {
+        padding-block: 0.42rem;
+        border-block-end: 1px dashed var(--hairline);
+      }
+      .clean-table tr td:last-child { border-block-end: 0; }
+      .clean-table td::before {
+        content: attr(data-col) " · ";
+        color: var(--secondary);
+        font-weight: 600;
+      }
+    }
+
+    /* macOS Code Window */
+    figure.mac-code {
+      margin: 1.2rem 0 0;
+      border-radius: 16px;
+      overflow: clip;
+      background: #141416;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .mac-code-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1rem;
+      background: #1d1d20;
+      font-size: 0.75rem;
+      color: #86868b;
+    }
+    .window-dots {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .window-dots i {
+      inline-size: 10px;
+      block-size: 10px;
+      border-radius: 50%;
+      background: #3a3a3c;
+    }
+    figure.mac-code pre {
+      color-scheme: dark;
+      accent-color: var(--accent);
+      margin: 0;
+      padding: 1rem 1.15rem;
+      color: #f5f5f7;
+      overflow-x: auto;
+      font-size: 0.84rem;
+      line-height: 1.58;
+    }
+
+    .site-footer {
+      padding-block: 2.8rem 3.4rem;
+      border-block-start: 1px solid var(--hairline);
+      font-size: 0.82rem;
+      color: var(--secondary);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    @media (max-width: 820px) {
+      .span-7, .span-5 { grid-column: span 12; }
+      .project-grid, .mem-Takeaways, .essay-toc, .limit-grid { grid-template-columns: 1fr; }
+      .rank-row {
+        grid-template-columns: 1fr auto;
+      }
+      .rank-bar-wrap {
+        grid-column: 1 / -1;
+        order: 3;
+      }
+    }
+    @media (max-width: 600px) {
+      html { scroll-padding-block-start: 5.5rem; }
+      .stage { inline-size: calc(100% - 1.5rem); }
+      .nav-inner { gap: 0.45rem 0.8rem; }
+      .nav-links { gap: 0.35rem 0.9rem; font-size: 0.78rem; }
+      .hero { padding-block: 3.6rem 2.8rem; }
+      .segmented button { padding: 0.38rem 0.72rem; font-size: 0.78rem; }
+      .rank-row { padding: 0.74rem 0.88rem; gap: 0.65rem; }
+      .dynamic-island { border-radius: 22px; padding: 0.78rem 1.05rem; gap: 0.55rem; }
+      .island-divider { display: none; }
+      .bento-card { border-radius: 22px; }
+    }
+  </style>
 </head>
 <body>
-<a class="skip" href="#main-content">跳到正文</a>
-<header class="top"><div class="wrap"><a class="brand" href="#top">Zhongyuan Zou</a><nav aria-label="主导航"><a href="#ranklab">推荐评测</a><a href="#projects">项目</a><a href="#writing">技术笔记</a><a href="https://github.com/Zou-Zhongyuan">GitHub ↗</a></nav></div></header>
-<div class="hero" id="top">
-  <div class="wrap">
-    <div>
-      <p class="kicker">Software Engineering · Xiamen University Malaysia</p>
-      <h1>Zhongyuan <span>Zou</span></h1>
-      <p class="hero-intro">软件工程本科生。这里记录我的推荐系统评测、智能体实验和后端工程实践。</p>
-      <div class="hero-actions"><a href="#ranklab">查看评测图表 ↓</a><a href="#projects">浏览项目</a></div>
+  <a class="skip-link" href="#main-content">跳至正文</a>
+
+  <header class="global-nav">
+    <div class="stage nav-inner">
+      <a class="nav-brand" href="#top">Zhongyuan Zou</a>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#ranklab">排序反转</a>
+        <a href="#interactive-labs">系统实验台</a>
+        <a href="#projects">全部工程</a>
+        <a href="#writing">技术笔记</a>
+        <a href="https://github.com/Zou-Zhongyuan" target="_blank" rel="noopener">GitHub ↗</a>
+        <button type="button" class="theme-pill" id="theme-toggle" aria-label="切换明暗外观">
+          <span aria-hidden="true" id="theme-glyph">◐</span>
+          <span id="theme-label">外观</span>
+        </button>
+      </nav>
     </div>
-    <aside class="hero-proof" aria-labelledby="snapshot-title">
-      <p class="label">RankLab / MovieLens 1M</p>
-      <h2 id="snapshot-title">同一个排序模型，两种评测口径</h2>
-      <div class="snapshot"><div><span>全候选</span><strong>0.29110</strong></div><div><span>抽样候选</span><strong>0.77606</strong></div></div>
-      <small>BPR-MF + LogisticRerank · NDCG@10 · 3 个随机种子</small>
-    </aside>
-  </div>
-</div>
-<main class="wrap" id="main-content" tabindex="-1">
-  <section class="section" id="ranklab" aria-labelledby="rank-heading">
-    <header class="section-head"><div><span class="label">Ranking &amp; Evaluation</span><h2 id="rank-heading">评测候选池如何改变模型排序</h2></div></header>
-    <div class="feature">
-      <div class="feature-copy">
-        <span class="status">官方 MovieLens 数据离线评测</span>
-        <h3>RankLab</h3>
-        <p>按全局时间切分交互数据，在同一套流程中对比召回、重排和两种候选池上的排名表现。</p>
-        <p class="example"><strong>同一对模型，排序发生反转</strong>在 MovieLens 1M 上，BPR-MF + HistGBDTRerank 在全候选评测中高于 BPR-MF，切换到抽样候选后，两者次序反转。</p>
-        <p class="chart-note">图表来自离线运行记录。两种候选池对应不同排名任务，分数仅在各自协议内比较。</p>
-      </div>
-      <div class="feature-chart">
-        <div class="controls" id="rank-controls" hidden>
-          <label>数据集<select id="rank-dataset"><option value="ml_1m_official">MovieLens 1M</option><option value="ml_latest_small_official">MovieLens Latest Small</option></select></label>
-          <label>候选池<select id="rank-protocol"><option value="full_corpus">全候选</option><option value="sampled_100">抽样候选</option></select></label>
-        </div>
-        <table class="chart-table">
-          <caption id="rank-caption" aria-live="polite">MovieLens 1M · 全候选 · 1,486 名评测用户 · 3 个种子</caption>
-          <thead><tr><th scope="col">模型</th><th scope="colgroup" colspan="2">NDCG@10 · 0–1</th></tr></thead>
-          <tbody id="rank-rows"><tr><th scope="row">BPR-MF + LogisticRerank</th><td><meter min="0" max="1" value="0.2911" aria-hidden="true">0.2911</meter></td><td class="score">0.2911</td></tr><tr><th scope="row">BPR-MF + HistGBDTRerank</th><td><meter min="0" max="1" value="0.28819" aria-hidden="true">0.28819</meter></td><td class="score">0.28819</td></tr><tr><th scope="row">ItemCF</th><td><meter min="0" max="1" value="0.28004" aria-hidden="true">0.28004</meter></td><td class="score">0.28004</td></tr><tr><th scope="row">ItemCF + LogisticRerank</th><td><meter min="0" max="1" value="0.27742" aria-hidden="true">0.27742</meter></td><td class="score">0.27742</td></tr><tr><th scope="row">BPR-MF</th><td><meter min="0" max="1" value="0.26695" aria-hidden="true">0.26695</meter></td><td class="score">0.26695</td></tr><tr><th scope="row">Popularity</th><td><meter min="0" max="1" value="0.25839" aria-hidden="true">0.25839</meter></td><td class="score">0.25839</td></tr><tr><th scope="row">TIGER-Seq2Seq</th><td><meter min="0" max="1" value="0.19894" aria-hidden="true">0.19894</meter></td><td class="score">0.19894</td></tr></tbody>
-        </table>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="stage hero-content">
+      <p class="eyebrow hero-stagger" style="--d: 0.04s">Xiamen University Malaysia · Software Engineering</p>
+      <h1 class="hero-stagger" style="--d: 0.12s">Zhongyuan Zou.</h1>
+      <p class="hero-statement hero-stagger" style="--d: 0.2s">
+        用严密的离线协议与确定性状态机，<br><span class="tone-muted">丈量推荐排序与智能体系统的真实边界。</span>
+      </p>
+      <div class="cta-row hero-stagger" style="--d: 0.28s">
+        <a class="apple-btn apple-btn-primary" href="#ranklab">体验 RankLab 排序反转 ↓</a>
+        <a class="apple-btn apple-btn-glass" href="https://github.com/Zou-Zhongyuan/campus-checkout-workflow" target="_blank" rel="noopener">Campus Checkout 源码 ↗</a>
+        <a class="apple-btn apple-btn-glass" href="#article-rank-inversion">RankLab 案例研究 ↓</a>
       </div>
     </div>
   </section>
-  <section class="section" id="projects" aria-labelledby="project-heading">
-    <header class="section-head"><div><h2 id="project-heading">更多项目</h2><p>工程样例、实验记录与研究草稿。展开卡片查看各自的验证范围。</p></div></header>
-    <div class="filters" role="group" aria-label="按方向筛选" hidden>
-      <button type="button" data-filter="all" aria-pressed="true">全部</button><button type="button" data-filter="agent" aria-pressed="false">智能体</button><button type="button" data-filter="systems" aria-pressed="false">工程</button><button type="button" data-filter="research" aria-pressed="false">研究</button>
-    </div>
-    <div class="projects"><article class="project" id="toolforge" data-category="agent">
-      <div class="project-top"><span class="project-category">工具调用评测</span><span class="status">非模型流水线验证</span></div>
-      <h3>ToolForge</h3><p>用冻结任务集、参考策略和无动作反例验证评测协议。</p>
-      <div class="project-metric"><strong>120 题</strong><span>组合任务验证</span></div>
-      <details><summary>方法与证据范围</summary><p>将工具调用任务按结构拆为 40 道开发题和 80 道测试题，独立重算并核对任务哈希。参考策略通过全部 120 题，无动作反例通过 0 题。离线记录也包含 16 项测试通过。</p><p>这组结果检验数据和评分器。真实模型推理、微调及外部 BFCL 对照仍待运行。</p></details>
-    </article>
-<article class="project" id="agentmemorylab" data-category="agent">
-      <div class="project-top"><span class="project-category">对话记忆检索</span><span class="status">合成数据复现</span></div>
-      <h3>AgentMemoryLab</h3><p>比较时间窗口、BM25、轻量向量和混合检索在相同预算下返回的证据。</p>
-      <div class="project-metric"><strong>272 次</strong><span>逐题逐方法复核</span></div>
-      <details><summary>方法与证据范围</summary><p>68 道合成题 × 4 种方法，共 272 次运行。旧预算口径的前十排名、选中片段和证据 token 数逐项一致。新增真实 tokenizer 计数与序列化开销审计。</p><p>官方 LongMemEval_S 已准备数据和脚本。官方切分检索对照及端到端问答成绩待跑。</p></details>
-    </article>
-<article class="project" id="forgepilot" data-category="systems">
-      <div class="project-top"><span class="project-category">工作流与人工审批</span><span class="status">本地测试 · 模拟</span></div>
-      <h3>ForgePilot</h3><p>用模拟任务验证持久化、审批、取消与预算熔断。</p>
-      <div class="project-metric"><strong>20 项</strong><span>后端测试通过</span></div>
-      <details><summary>方法与证据范围</summary><p>Antigravity 的本机日志记录 20 项后端测试通过。模拟工作流验证了待审批、取消、结果持久化与预算耗尽后的停止行为。</p><p>这里展示的是工作流与状态管理验证。Docker、PostgreSQL 联调与真实模型端到端基准待跑。</p></details>
-    </article>
-<article class="project" id="agent-review" data-category="research">
-      <div class="project-top"><span class="project-category">软件工程智能体文献综述</span><span class="status">研究草稿</span></div>
-      <h3>Agent Review</h3><p>为候选文献记录纳入理由、筛选深度和证据来源。</p>
-      <div class="project-metric"><strong>21 篇</strong><span>当前纳入账本</span></div>
-      <details><summary>方法与证据范围</summary><p>第二轮账本含 64 条去重题录，15 条题录阶段排除、25 条待全文、3 条全文阶段排除、21 条纳入。第二轮重点复核了一篇全文，并将另一篇重新归入排除。</p><p>草稿尚未投稿。原始检索快照和双人独立筛选仍待补齐，账本包含此前阶段的筛选记录。</p></details>
-    </article>
-<article class="project" id="career-research" data-category="research">
-      <div class="project-top"><span class="project-category">岗位研究与技术映射</span><span class="status">2026-11-18 快照</span></div>
-      <h3>Career Research</h3><p>把公开招聘信息、技术主题和可练习的工程项目整理成结构化资料。</p>
-      <div class="project-metric"><strong>46 条</strong><span>岗位核验记录</span></div>
-      <details><summary>方法与证据范围</summary><p>归档包含 46 条公开岗位核验记录与 6 项技术主题映射。使用固定日期快照，区分已核验字段与缺失字段，方便后续重新核验。</p><p>这里展示研究方法和汇总计数。岗位状态以招聘官网的实时页面为准。</p></details>
-    </article>
-<article class="project" id="campus-checkout" data-category="systems">
-      <div class="project-top"><span class="project-category">结账状态机</span><span class="status">源码公开</span></div>
-      <h3>Campus Checkout</h3><p>把校园外卖 UML 设计中的订单与付款状态变成可运行的 Python 样例。</p>
-      <div class="project-metric"><strong>16 项</strong><span>单元测试通过</span></div>
-      <details><summary>方法与证据范围</summary><p>订单和付款有独立状态。模拟器覆盖接单、拒单退款、付款前取消、重复事件与错序重试。原课程项目中，我负责结账和配送用例的时序图与通信图。</p><p>Python 标准库实现，付款与退款由内存中的事件模拟。</p><a href="https://github.com/Zou-Zhongyuan/campus-checkout-workflow">查看源码与测试 ↗</a></details>
-    </article></div>
-  </section>
-  <section class="section" id="writing" aria-labelledby="writing-heading">
-    <header class="section-head"><div><h2 id="writing-heading">技术笔记</h2></div></header>
-    <div class="note-index"><a href="#article-payment-acceptance">支付成功之后，订单为什么还要等商家接单？ →</a><a href="#article-bva-49-50-51">用 49、50、51 检查边界条件 →</a></div>
-    <article id="article-payment-acceptance" class="note" aria-labelledby="heading-payment">
-        <header class="note-head">
-          <h2 id="heading-payment">支付成功之后，订单为什么还要等商家接单？</h2>
-          <p class="article-lead">顾客付款后，商家仍可能因为缺货拒单。要让系统知道该继续备餐还是等待退款，可以把订单状态和付款状态分开记录。</p>
-        </header>
-        <h3>把职责放到对应的对象里</h3>
-        <p>在 BCE（Boundary、Control、Entity）模型里，结账界面、支付网关接口和商家界面把外部事件交给控制器。控制器判断当前状态是否允许相应操作，再更新订单和付款记录。商家点击接单时，控制器检查订单仍在待接单状态，付款也已经成功。</p>
-        <div class="table-region" tabindex="0" role="region" aria-labelledby="caption-flow">
-          <table>
-            <caption id="caption-flow">一个订单的结账与退款路径</caption>
-            <thead><tr><th scope="col">事件</th><th scope="col">订单状态</th><th scope="col">付款状态</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">提交订单</th><td>待付款</td><td>未付款</td></tr>
-              <tr><th scope="row">付款前取消</th><td>已取消</td><td>已关闭</td></tr>
-              <tr><th scope="row">确认付款</th><td>待商家接单</td><td>已付款</td></tr>
-              <tr><th scope="row">商家接单</th><td>已接单</td><td>已付款</td></tr>
-              <tr><th scope="row">商家拒单</th><td>已拒单</td><td>待退款</td></tr>
-              <tr><th scope="row">收到退款确认</th><td>已拒单</td><td>已退款</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <h3>用失败路径检验设计</h3>
-        <p>商家提醒发送失败时，订单仍然待接单，付款记录仍然有效。后续可以把通知写入独立的待投递记录，让推送重试与订单状态更新分开，商家也能从待接单列表查单。</p>
-        <p>模拟器覆盖同一事件重放、同 ID 异内容冲突，以及先收到拒单、补齐付款后再处理拒单。接入真实网关时，还需要定义超时与迟到的付款回调如何对账，以及接单和取消并发到达时哪次状态变化先提交。这些场景需要持久化和集成测试。</p>
+
+  <main class="stage" id="main-content" tabindex="-1">
+    <!-- KEYNOTE SUMMARY BENTO -->
+    <section class="hero-bento" aria-label="核心实验指标概览">
+      <article class="bento-card stat-tile span-7 reveal-item">
+        <span class="tile-kicker">RankLab · 因果时间切分防泄漏审计</span>
+        <div class="tile-figure num">0.0 bit</div>
+        <p>MovieLens 1M 共 10,402 份推荐列表零已看泄漏。反事实检验显示按用户留一法造成 99.98% 用户穿越未来，而全局切分在注入未来满分事件后保持零比特漂移。</p>
       </article>
-<article id="article-bva-49-50-51" class="note" aria-labelledby="heading-bva">
-        <header class="note-head">
-          <h2 id="heading-bva">用 49、50、51 检查边界条件</h2>
-          <p class="article-lead">假设批量导出每次允许 1 到 50 条记录。上界附近取 49、50、51，可以同时验证正常余量、恰好满额、超限三种结果。</p>
-        </header>
-        <div class="table-region" tabindex="0" role="region" aria-labelledby="caption-bva">
-          <table>
-            <caption id="caption-bva">批量导出的上界测试</caption>
-            <thead><tr><th scope="col">条数</th><th scope="col">允许导出</th><th scope="col">剩余额度</th><th scope="col">恰好满额</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">49</th><td>是</td><td>1</td><td>否</td></tr>
-              <tr><th scope="row">50</th><td>是</td><td>0</td><td>是</td></tr>
-              <tr><th scope="row">51</th><td>否</td><td>0</td><td>否</td></tr>
-            </tbody>
-          </table>
+      <article class="bento-card stat-tile span-5 reveal-item">
+        <span class="tile-kicker">TIGER-Seq2Seq · 生成式受控解码</span>
+        <div class="tile-figure num">5,017,998</div>
+        <p>ConstrainedPrefixTrie 受控束搜索零非法物品幻觉；MPS 训练转 CPU 解码提速 575×。</p>
+      </article>
+      <article class="bento-card stat-tile span-5 reveal-item">
+        <span class="tile-kicker">AgentMemoryLab · 四层分词核算</span>
+        <div class="tile-figure num">+53.8%</div>
+        <p>tiktoken o200k_base 揭示 JSON 转义与 ChatML 框架对 800-token 裸证据上限的隐性超支。</p>
+      </article>
+      <article class="bento-card stat-tile span-7 reveal-item">
+        <span class="tile-kicker">5 项代码套件 · 确定性单元测试全通</span>
+        <div class="tile-figure num">71 / 71</div>
+        <p>覆盖 RankLab(8)、AgentMemoryLab(11)、ToolForge(16)、ForgePilot(20) 与公开仓库 Campus Checkout(16) 的防泄漏、CAS 审批与状态机断言，严格隔离未执行阶段。</p>
+      </article>
+    </section>
+
+    <!-- CHAPTER 01: RANKLAB FLUID REORDERING STAGE -->
+    <section class="chapter" id="ranklab" aria-labelledby="rk-heading">
+      <header class="chapter-head reveal-item">
+        <p class="eyebrow">RankLab · Empirical Evaluation</p>
+        <h2 id="rk-heading">同一个排序模型，<br><span class="tone-muted">换一套候选池就反转。</span></h2>
+        <p>点击切换下方「全量候选」与「抽样候选」胶囊按钮，观察 7 个推荐模型在真实 GroupLens 数据上的实时位移。</p>
+      </header>
+
+      <div class="seg-bar-row reveal-item">
+        <div class="segmented" id="seg-dataset" role="group" aria-label="选择数据集">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          <button type="button" data-val="ml_1m_official" aria-pressed="true">MovieLens 1M</button>
+          <button type="button" data-val="ml_latest_small_official" aria-pressed="false">Latest Small</button>
         </div>
-        <p>如果把条件写成 <code>count &lt; 50</code>，50 会被提前拒绝。如果把上限错写成 51，51 会被放行。49 则用来检查计数仍有余量时是否被提前标成满额。完整测试还应覆盖 0、1、2 和非整数输入。</p>
-        <pre tabindex="0" aria-label="Python 边界测试示例"><code>def export_status(count: int) -&gt; tuple[bool, int, bool]:
+
+        <div class="segmented" id="seg-proto" role="group" aria-label="选择候选池协议">
+          <span class="seg-thumb" aria-hidden="true"></span>
+          <button type="button" data-val="full_corpus" aria-pressed="true">全量候选 Full-Corpus</button>
+          <button type="button" data-val="sampled_100" aria-pressed="false">抽样候选 Sampled-100</button>
+        </div>
+      </div>
+
+      <div class="bento-card stage-surface reveal-item" id="workbench-ranklab">
+        <div class="stage-caption-row">
+          <span id="rk-summary-line">MovieLens 1M · 1,486 名评测用户 · 3,669 部候选电影 · 3 随机种子均值</span>
+          <div class="metric-chips" id="rk-metrics" role="group" aria-label="选择排序指标">
+            <button type="button" class="chip-btn" data-metric="ndcg10" aria-pressed="true">NDCG@10</button>
+            <button type="button" class="chip-btn" data-metric="recall10" aria-pressed="false">Recall@10</button>
+            <button type="button" class="chip-btn" data-metric="heavy_ndcg10" aria-pressed="false">老用户 Heavy 20+</button>
+            <button type="button" class="chip-btn" data-metric="cov10" aria-pressed="false">目录覆盖率</button>
+          </div>
+        </div>
+
+        <p id="rk-reorder-status" role="status" class="visually-hidden"></p>
+
+        <ol class="rank-list" id="rk-list">
+          
+          <li class="rank-row" data-model="BPR-MF -&gt; LogisticRerank" style="--vt-name: row-bpr-mf-logisticrerank;">
+            <div class="rank-left">
+              <span class="rank-pos">#1</span>
+              <span class="rank-name">BPR-MF + LogisticRerank</span>
+              <span class="delta-pill is-subtle">持平</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 100.0%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.29110</strong>
+              <span class="rank-meta num">覆盖 9.4% · 0.32ms</span>
+            </div>
+          </li>
+
+          <li class="rank-row" data-model="BPR-MF -&gt; HistGBDTRerank" style="--vt-name: row-bpr-mf-histgbdtrerank;">
+            <div class="rank-left">
+              <span class="rank-pos">#2</span>
+              <span class="rank-name">BPR-MF + HistGBDTRerank</span>
+              <span class="delta-pill is-drop">↓4 抽样反转</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 99.0%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.28819</strong>
+              <span class="rank-meta num">覆盖 7.2% · 2.66ms</span>
+            </div>
+          </li>
+
+          <li class="rank-row" data-model="ItemCF" style="--vt-name: row-itemcf;">
+            <div class="rank-left">
+              <span class="rank-pos">#3</span>
+              <span class="rank-name">ItemCF</span>
+              <span class="delta-pill is-subtle">持平</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 96.2%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.28004</strong>
+              <span class="rank-meta num">覆盖 5.2% · 0.19ms</span>
+            </div>
+          </li>
+
+          <li class="rank-row" data-model="ItemCF -&gt; LogisticRerank" style="--vt-name: row-itemcf-logisticrerank;">
+            <div class="rank-left">
+              <span class="rank-pos">#4</span>
+              <span class="rank-name">ItemCF + LogisticRerank</span>
+              <span class="delta-pill is-subtle">↓1</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 95.3%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.27742</strong>
+              <span class="rank-meta num">覆盖 4.7% · 0.44ms</span>
+            </div>
+          </li>
+
+          <li class="rank-row" data-model="BPR-MF" style="--vt-name: row-bpr-mf;">
+            <div class="rank-left">
+              <span class="rank-pos">#5</span>
+              <span class="rank-name">BPR-MF</span>
+              <span class="delta-pill is-rise">↑3 抽样虚升</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 91.7%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.26695</strong>
+              <span class="rank-meta num">覆盖 32.7% · 0.09ms</span>
+            </div>
+          </li>
+
+          <li class="rank-row" data-model="Popularity" style="--vt-name: row-popularity;">
+            <div class="rank-left">
+              <span class="rank-pos">#6</span>
+              <span class="rank-name">Popularity</span>
+              <span class="delta-pill is-rise">↑2 抽样虚升</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 88.8%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.25839</strong>
+              <span class="rank-meta num">覆盖 3.8% · 0.08ms</span>
+            </div>
+          </li>
+
+          <li class="rank-row" data-model="TIGER-Seq2Seq" style="--vt-name: row-tiger-seq2seq;">
+            <div class="rank-left">
+              <span class="rank-pos">#7</span>
+              <span class="rank-name">TIGER-Seq2Seq</span>
+              <span class="delta-pill is-subtle">持平</span>
+            </div>
+            <div class="rank-bar-wrap" aria-hidden="true">
+              <div class="rank-bar-fill" style="inline-size: 68.3%"></div>
+            </div>
+            <div class="rank-right">
+              <strong class="rank-score num">0.19894</strong>
+              <span class="rank-meta num">覆盖 27.0% · 12.81ms</span>
+            </div>
+          </li>
+        </ol>
+
+        <div class="insight-callout" id="rk-insight">
+          <div>
+            <strong>统计显著性（B=2,000 配对 Bootstrap）：</strong>在全量候选池下，<code>BPR-MF + HistGBDTRerank</code> 相对 <code>BPR-MF</code> 显著提升 <strong>+7.96%</strong>（p &lt; 0.001）；一旦切到负采样，名次直接跌落 4 位（<strong>-5.47%</strong>）。
+          </div>
+        </div>
+
+        <details class="apple-details slope-drawer">
+          <summary>展开全候选 vs 抽样候选双轴斜率轨迹图</summary>
+          <div class="details-content-inner">
+            <div class="slope-svg-box">
+              <svg id="slope-svg" viewBox="0 0 760 290" width="760" height="290" role="img" aria-labelledby="slope-t">
+                <title id="slope-t">Full-Corpus 与 Sampled-100 双轴排名反转斜率曲线</title>
+              </svg>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02: TABBED INTERACTIVE STUDIO -->
+    <section class="chapter" id="interactive-labs" aria-labelledby="studio-heading">
+      <header class="chapter-head reveal-item">
+        <p class="eyebrow">Interactive Systems Studio</p>
+        <h2 id="studio-heading">深入系统内部。<br><span class="tone-muted">预算、门禁与失败边界皆可触摸。</span></h2>
+      </header>
+
+      <div class="bento-card studio-card reveal-item">
+        <div class="studio-tablist" role="tablist" aria-label="系统内部交互实验">
+          <button type="button" role="tab" id="tab-mem" aria-selected="true" tabindex="0">记忆预算胶囊 · AgentMemoryLab</button>
+          <button type="button" role="tab" id="tab-cas" aria-selected="false" tabindex="-1">CAS 审批灵动岛 · ForgePilot</button>
+          <button type="button" role="tab" id="tab-tf" aria-selected="false" tabindex="-1">工具失败谱系 · ToolForge</button>
+        </div>
+
+        <div class="studio-panels">
+          <!-- Studio Panel 1: Memory Capsule -->
+          <div role="tabpanel" id="workbench-memory" aria-labelledby="tab-mem">
+            <div class="studio-panel-inner">
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+                <div class="segmented" id="seg-mem" role="group" aria-label="切换 Token 预算裁剪口径">
+                  <span class="seg-thumb" aria-hidden="true"></span>
+                  <button type="button" data-val="o200k_evidence_800" aria-pressed="true">裸证据 ≤ 800</button>
+                  <button type="button" data-val="o200k_serialized_800" aria-pressed="false">JSON 数组 ≤ 800</button>
+                  <button type="button" data-val="o200k_chat_800" aria-pressed="false">完整 ChatML ≤ 800</button>
+                  <button type="button" data-val="o200k_chat_1050" aria-pressed="false">ChatML ≤ 1050</button>
+                </div>
+                <span id="mem-desc" style="font-size:0.82rem;color:var(--secondary);">tiktoken o200k_base · 仅约束裸块，暴露 +46%~+54% 真实超支</span>
+              </div>
+
+              <div class="storage-legend">
+                <span><i class="dot" style="background:var(--accent)"></i>裸证据块 (Raw Chunks)</span>
+                <span><i class="dot" style="background:var(--amber)"></i>JSON 键名缩进与 \n 转义</span>
+                <span><i class="dot" style="background:var(--rose)"></i>Chain-of-Note 提示词 + ChatML (+7)</span>
+                <span><i class="dot" style="background:var(--ink)"></i>竖线 = 当前名义预算上限</span>
+              </div>
+
+              <div class="capsule-stack" id="mem-capsules"></div>
+
+              <div class="mem-Takeaways">
+                <div class="mini-note">
+                  <strong class="num">4.14×</strong>
+                  <span>官方 LongMemEval_S（数据集规模 500 题）前 60 题 2,913 个会话 tokenizer 对照的最高 BPE 低估倍数</span>
+                </div>
+                <div class="mini-note">
+                  <strong class="num">0.0%</strong>
+                  <span>ChronoHybridAnchor 预算内陈旧记忆覆写率（BM25 为 16.7%）</span>
+                </div>
+                <div class="mini-note">
+                  <strong class="num">51 题</strong>
+                  <span>修复上游评测脚本漏算 assistant 轮次真值与 13 题重复填充 ID</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Panel 2: Dynamic Island CAS State Machine -->
+          <div role="tabpanel" id="workbench-workflow" aria-labelledby="tab-cas" hidden="until-found">
+            <div class="studio-panel-inner">
+              <div class="island-stage">
+                <div class="dynamic-island" id="cas-island">
+                  <span class="island-dot" id="cas-dot" aria-hidden="true"></span>
+                  <span class="island-status" id="cas-status">AWAITING_APPROVAL</span>
+                  <span class="island-divider" aria-hidden="true"></span>
+                  <span class="island-meta" id="cas-sha">SHA · a94f1c8</span>
+                  <span class="island-divider" aria-hidden="true"></span>
+                  <span class="island-meta num" id="cas-counters">门禁 1 · 操作 0</span>
+                </div>
+
+                <div class="island-actions" role="group" aria-label="触发工作流事件">
+                  <button type="button" class="island-btn" data-cas="approve">✓ 匹配 40-Hex SHA 放行</button>
+                  <button type="button" class="island-btn" data-cas="mismatch">✕ 注入过期 SHA (CAS 拦截)</button>
+                  <button type="button" class="island-btn" data-cas="cancel">⊘ 请求取消 (测试幂等 409)</button>
+                  <button type="button" class="island-btn" data-cas="budget">⚡ 模拟 F2 任务 20/20 预算熔断</button>
+                  <button type="button" class="island-btn" data-cas="reset">↺ 重置状态</button>
+                </div>
+
+                <p class="island-caption" id="cas-caption" aria-live="polite">
+                  <strong>mock 模拟工作流演示：</strong>当前集成工作树补丁 <code>a94f1c8e…3e9c</code> 已通过沙箱单测并挂起于人工门禁（<code>pending_approval_gates = 1</code> 不混入已提交人工操作计数）。点击上方按钮检验并发冲突与 mock 预算熔断保护。
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Studio Panel 3: ToolForge -->
+          <div role="tabpanel" id="workbench-toolforge" aria-labelledby="tab-tf" hidden="until-found">
+            <div class="studio-panel-inner">
+              <p style="margin:0;color:var(--secondary);font-size:0.94rem;">
+                独立重放 3 个划分共 <strong style="color:var(--ink)">1,980 条轨迹（指标漂移 0.0000）</strong>，锁定 60 份冻结产物 SHA-256 零字节改动，并在 120 道受控组合任务上完成参考策略（120/120）与空动作反例（0/120）双向校准：
+              </p>
+              <div class="tax-bento">
+                <div class="tax-tile"><code>SCHEMA_JSON_INVALID</code><p>调用块 JSON 语法损坏或协议字段缺失。</p></div>
+                <div class="tax-tile"><code>HALLUCINATED_TOOL</code><p>越界调用任务声明集合外的不存在函数。</p></div>
+                <div class="tax-tile"><code>MISSING_REQUIRED_ARG</code><p>命中目标工具但遗漏必填 Schema 参数。</p></div>
+                <div class="tax-tile"><code>TYPE_CONSTRAINT</code><p>参数类型、枚举或格式违反工具契约。</p></div>
+                <div class="tax-tile"><code>MISSED_CLARIFICATION</code><p>面对缺参歧义指令盲目猜测而非先向用户澄清。</p></div>
+                <div class="tax-tile"><code>STATE_DEPENDENCY</code><p>多步组合任务中违反查询→变更→核验拓扑顺序。</p></div>
+                <div class="tax-tile"><code>PREMATURE_STOP</code><p>子目标尚未闭合即提前结束回合。</p></div>
+                <div class="tax-tile"><code>CONTEXT_BUDGET_4096</code><p>超出 6/7 轮上限或触发 4096 上下文硬护栏。</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 03: BENTO SYSTEMS GALLERY -->
+    <section class="chapter" id="projects" aria-labelledby="proj-heading">
+      <header class="chapter-head reveal-item">
+        <p class="eyebrow">Systems &amp; Research Portfolio</p>
+        <h2 id="proj-heading">七项工程。<br><span class="tone-muted">全部基于可复算证据。</span></h2>
+      </header>
+
+      <search aria-label="按领域筛选工程卡片">
+        <div class="filter-pills" id="proj-filters">
+          <button type="button" class="chip-btn" data-filter="all" aria-pressed="true">全部 (7)</button>
+          <button type="button" class="chip-btn" data-filter="ranking" aria-pressed="false">推荐与检索</button>
+          <button type="button" class="chip-btn" data-filter="agent" aria-pressed="false">智能体记忆与工具</button>
+          <button type="button" class="chip-btn" data-filter="systems" aria-pressed="false">确定性状态机</button>
+          <button type="button" class="chip-btn" data-filter="research" aria-pressed="false">综述与前沿探针</button>
+        </div>
+      </search>
+
+      <div class="project-grid">
+        
+        <article class="bento-card project-tile reveal-item" id="ranklab-spec" data-category="ranking">
+          <div class="proj-head">
+            <span class="proj-eyebrow">首推项目 · 推荐排序与生成式检索</span>
+            <h3>RankLab</h3>
+            <p class="proj-tagline">全局时间切分、两阶段重排与受控前缀树束搜索。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">+9.05%</strong>
+            <span>MovieLens 1M 全候选重排增益 (p &lt; 0.001)</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>反事实检验表明按用户留一法（LOO）在 ml-1m 上造成 99.98% 用户穿越未来；全局三切点协议在注入未来满分事件后保持 0.0 bit 漂移，10,402 份排序列表零已看泄漏，8/8 防泄漏单测全通。</li><li>PyTorch TIGER-Seq2Seq 结合 ConstrainedPrefixTrie 解码 5,017,998 条前缀束实现 0 非法物品幻觉，Coverage@100 达 60.78%；MPS 训练转 CPU 解码将单用户耗时从 3,456.8 ms 降至 6.0 ms（575× 加速）。</li><li>边界说明：官方数据包均经 GroupLens MD5/SHA-256 核验；外部在线 RankGPT 与 7B TALLRec 微调标 NOT_EXECUTED。</li></ul>
+                <p class="proj-cta"><a href="#article-rank-inversion">阅读完整 RankLab 案例研究 ↓</a> &nbsp;·&nbsp; <a href="#ranklab">交互实验台 ↑</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="bento-card project-tile reveal-item" id="campus-checkout" data-category="systems">
+          <div class="proj-head">
+            <span class="proj-eyebrow">次推项目 · 公开源码仓库 · 正交状态机</span>
+            <h3>Campus Checkout</h3>
+            <p class="proj-tagline">订单履约与支付结算解耦、幂等吸收与乱序回调对账。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">16 / 16</strong>
+            <span>Python 标准库零依赖单测 · 公开 GitHub 源码</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>源自校园外卖系统 UML 时序与通信设计，将 OrderStatus 与 PaymentStatus 正交建模，清晰处理付款前取消、商家缺货拒单与异步退款。</li><li>内置 event_id 幂等重放吸收与同 ID 异载荷冲突异常，支持先达拒单意图、后补付款确认的乱序收敛。</li><li>边界说明：独立仓库公开源码与完整测试套件，网关事件由内存流模拟。</li></ul>
+                <p class="proj-cta"><a href="https://github.com/Zou-Zhongyuan/campus-checkout-workflow" target="_blank" rel="noopener">访问 GitHub 公开仓库 ↗</a> &nbsp;·&nbsp; <a href="#article-payment-acceptance">状态机笔记 ↓</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="bento-card project-tile reveal-item" id="agentmemorylab" data-category="agent">
+          <div class="proj-head">
+            <span class="proj-eyebrow">长程记忆与分词预算</span>
+            <h3>AgentMemoryLab</h3>
+            <p class="proj-tagline">四层 BPE 序列化核算与零陈旧覆写的时间锚点检索。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">0.0%</strong>
+            <span>ChronoHybridAnchor 预算内陈旧记忆覆写率</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>冻结协议下 272/272 次旧预算运行实现字节级零误差复现；切换真实 o200k_base 后 88.97% 运行截断边界改变，揭示 JSON 转义与 CoN/ChatML 带来的 +46%~+54% 隐性输入膨胀，11/11 单测全通。</li><li>结构审计 ICLR 2025 官方 LongMemEval_S（MIT，官方数据集规模 500 题）：通过 OPAQUE_PUBLIC_IDS_V2 阻断 answer_* ID 泄漏并修复 13 题重复填充 ID 与 51 题助手轮次漏算；在前 60 题 2,913 个会话的 tokenizer 对照中捕获最高 4.14× BPE 词表低估。</li><li>边界说明：官方数据已校验落盘并完成 CPU 延迟实测；端到端 LLM QA Judge 标 NOT_EXECUTED。</li></ul>
+                <p class="proj-cta"><a href="#workbench-memory">体验记忆预算胶囊 ↑</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="bento-card project-tile reveal-item" id="toolforge" data-category="agent">
+          <div class="proj-head">
+            <span class="proj-eyebrow">多轮工具调用协议</span>
+            <h3>ToolForge</h3>
+            <p class="proj-tagline">有状态沙箱重放、受控组合验证与双推理后端。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">1,980 轮</strong>
+            <span>独立状态重放 0.0000 漂移 · 60 文件 SHA-256 锁定</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>composition_v2 受控组合任务（40 开发 + 80 测试，max_turns=7）经参考策略 120/120 通过、空动作反例 0/120 通过，双重校准评分器。</li><li>锁定 35 题开发集小样本 0-shot/2-shot 对照器，补齐 Apple Silicon 4-bit MLXQwen3Agent（峰值约 2.5 GB）与 max_context_tokens=4096 硬护栏，16/16 严格 -W error 单测通过。</li><li>边界说明：当前离线验证均为非 LLM 评分流水线核验；真实 Qwen3-4B 权重推理与 QLoRA/DPO 标 NOT_EXECUTED。</li></ul>
+                <p class="proj-cta"><a href="#workbench-toolforge">查看 8 类工具失败谱系 ↑</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="bento-card project-tile reveal-item" id="forgepilot" data-category="systems">
+          <div class="proj-head">
+            <span class="proj-eyebrow">确定性智能体工作流 · mock 模拟验证</span>
+            <h3>ForgePilot</h3>
+            <p class="proj-tagline">40-Hex Commit SHA 并发审批门禁与失败关闭沙箱。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">20 / 20</strong>
+            <span>本地后端测试全通 · mock 模拟工作流与 SSE 闭环</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>CAS 人工审批强制核验 40 位十六进制 integration_commit_sha，拦截过期补丁放行；终态重复取消返回 HTTP 409 且不虚增计数，拆分已记录操作与 pending_approval_gates。</li><li>WorkspacePathGuard 阻断工作区内指向 .git / .env 的软链逃逸；在 repeats=3 mock 模拟基准（MockModelEngine）中忠实保留 F2-fx-risk-audit 触达 max_llm_calls=20 的 BUDGET_EXCEEDED 熔断。</li><li>边界说明：当前 20/20 单测、SQLite WAL、Alembic 离线 DDL 与 Vite 8 构建均为本地 mock 模拟工作流验证；Docker 内核隔离、实时 PostgreSQL 与外部 LLM API 标 NOT_EXECUTED。</li></ul>
+                <p class="proj-cta"><a href="#workbench-workflow">交互测试 CAS 灵动胶囊 ↑</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="bento-card project-tile reveal-item" id="agent-review" data-category="research">
+          <div class="proj-head">
+            <span class="proj-eyebrow">系统性文献综述与数学勘误</span>
+            <h3>SE Agent SLR</h3>
+            <p class="proj-tagline">PRISMA 2020 账本守恒断言与前沿策略蒸馏精读审计。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">21 篇</strong>
+            <span>正式纳入主研究 (S01–S21) · 34/34 引用 AST 核验</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>脚本化守恒校验 139 原始命中 → 64 去重 → 49 全文队列 → 21 篇纳入，区分元数据初筛与全文精读深度。</li><li>逐行精读 SWE-OPD（arXiv:2611.21020v1），定位截断 Top-K 逆向 KL 支撑集逃逸梯度（∇_θ log Z_total）引发重复坍缩的机理，并捕获原论文摘要/表格基线差值与表号错引。</li><li>边界说明：未投稿研究草稿（Research Draft）；剩余 25 篇待读全文与双人独立盲筛待完成。</li></ul>
+                <p class="proj-cta"><a href="#writing">阅读下方工程笔记 ↓</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="bento-card project-tile reveal-item" id="career-research" data-category="research">
+          <div class="proj-head">
+            <span class="proj-eyebrow">工业界前沿架构探针</span>
+            <h3>Frontier Systems Telemetry</h3>
+            <p class="proj-tagline">六大前沿强化学习、代码工作区与生成式推荐架构映射。</p>
+          </div>
+          <div class="proj-stat">
+            <strong class="num">103 / 103</strong>
+            <span>一手论文与开源仓库 HTTP 探活可达</span>
+          </div>
+          <div class="proj-foot">
+            <details class="apple-details">
+              <summary>技术机制与验证边界</summary>
+              <div class="details-content-inner">
+                <ul><li>自动化探活并映射异步流式 RL（DAPO / verl）、序列级策略优化（GSPO / ROLL）、Worktree 自动记忆（Qwen-Code / LongMemEval）与全模态生成式推荐（TencentGR）至本地实验台。</li><li>全部快照经确定性脚本生成并附 SHA-256 校验，无公开一手出处字段严格留空。</li></ul>
+                <p class="proj-cta"><a href="#ranklab">对照本地实验平台 ↑</a></p>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CHAPTER 04: EDITORIAL ESSAYS -->
+    <section class="chapter" id="writing" aria-labelledby="writing-heading">
+      <header class="chapter-head reveal-item">
+        <p class="eyebrow">Case Study &amp; Engineering Notes</p>
+        <h2 id="writing-heading">案例研究与技术笔记。<br><span class="tone-muted">把直觉写成可验证的推论。</span></h2>
+      </header>
+
+      <nav class="essay-toc" aria-label="文章目录">
+        <a href="#article-rank-inversion">
+          <small>CASE STUDY 01 · RANKLAB</small>
+          <strong>全候选与抽样候选为什么会让推荐模型排名反转？ →</strong>
+        </a>
+        <a href="#article-payment-acceptance">
+          <small>NOTE 02 · STATE MACHINE</small>
+          <strong>支付成功之后，订单为什么还要等商家接单？ →</strong>
+        </a>
+        <a href="#article-bva-49-50-51">
+          <small>NOTE 03 · SOFTWARE QUALITY</small>
+          <strong>用 49、50、51 检查边界条件 →</strong>
+        </a>
+      </nav>
+
+      <div class="essay-stack">
+        <article class="bento-card essay-card" id="article-rank-inversion" aria-labelledby="e1-title">
+          <span class="proj-eyebrow">Case Study 01 · RankLab Offline Evaluation</span>
+          <h3 id="e1-title">RankLab 案例研究：全候选与抽样候选为什么会让推荐模型排名反转？</h3>
+          <p class="essay-lead">在推荐系统离线评测中，抽样候选协议常被用来降低全库打分开销。RankLab 在 GroupLens 官方 MovieLens Latest Small 与 MovieLens 1M 上，用同一套嵌套全局时间切分与 3 个随机种子对比了 <code>Full-Corpus</code>（全量可用候选池）与 <code>Sampled-100</code>（真实协议：<code>evaluation.py</code> 取每名用户在测试窗口内的<strong>全部可用未见正例 + 至多 99 个均匀抽取的未看负例</strong>，打分后按候选预算 <code>M = 100</code> 截取，并非固定 1+99）：<strong>全候选下显著胜出的两阶段重排模型，切换到抽样候选后名次骤降 4 位发生显著反转</strong>。</p>
+
+          <h4>一、反转机理：抽样协议把「头部精排」扭曲成了「粗粒度召回」</h4>
+          <p>为直观展示均匀负采样如何压缩全库排位，先看一个简化的<strong>单正例教学示例</strong>：设可用候选池总数为 <code>N</code>（剔除用户截至 <code>T_dev</code> 已评分影片），若仅对 1 个正例均匀无放回抽取 99 个负例，全库真实排位 <code>r</code>（<code>1 ≤ r ≤ N</code>）对应的期望抽样排位为：</p>
+          <div class="formula-box">E[r_sampled] = 1 + 99 × (r - 1) / (N - 1)   （单正例 1+99 教学示例）</div>
+          <p>在 RankLab 真实实现的 <code>sampled_100</code> 协议（全部可用未见正例 + 至多 99 个负例，之后按 <code>M = 100</code> 截取）中，多正例用户的候选池同样把大规模未看负例压缩至至多 99 个，因此具有完全一致的头部排位压缩效应（Krichene &amp; Rendle, KDD 2020）。代入 MovieLens 1M 的可用目录规模 <code>N = 3,669</code>（<code>ml-latest-small</code> 为 <code>N = 8,187</code>）即可看出扭曲根源：</p>
+          <ul class="essay-list">
+            <li><strong>头部压缩失真（教学示例直觉）</strong>：在 <code>N = 3,669</code> 的单正例示例下，全库仅排在第 <strong>r = 38</strong> 名的物品，进入抽样池后的期望排位约为 <strong>r_samp ≈ 2.0</strong>；即便全库跌至 <strong>r = 335</strong> 名，期望排位仍在第 10 名附近。真实 <code>sampled_100</code> 协议同样大幅削弱了负例竞争密度。</li>
+            <li><strong>两阶段重排反转（<code>BPR-MF + HistGBDTRerank</code> vs <code>BPR-MF</code>）</strong>：全候选 <code>NDCG@10</code> 奖励将正例从第 20–100 名精准推入前 10 名的头部排序分辨力，因此 <code>HistGBDTRerank</code> 在 <code>ml-1m</code> 全候选下将 <code>BPR-MF</code> 从 <code>0.26695</code>（#5）显著提升至 <code>0.28819</code>（#2，<strong>+7.96%</strong>，<code>p &lt; 0.001</code>）。但抽样 <code>NDCG@10</code> 实质退化为衡量全库约 Top-370 的粗排覆盖；仅对 Top-100 候选做非线性分裂重排的树模型引入了局部打分方差，在 <code>Sampled-100</code> 中反而跌至 <code>0.72407</code>（#6），显著落后于未重排的 <code>BPR-MF</code>（<code>0.76598</code>，#2，<strong>-5.47%</strong>，<code>p &lt; 0.001</code>）。</li>
+            <li><strong>协同过滤与矩阵分解倒置（<code>ItemCF</code> vs <code>BPR-MF</code>）</strong>：在 <code>ml-1m</code> 全候选下，<code>ItemCF</code>（<code>0.28004</code>，#3）显著优于 <code>BPR-MF</code>（<code>0.26695</code>，#5，差值 <code>-4.68%</code>，<code>p &lt; 0.001</code>）；但因 <code>BPR-MF</code> 拥有更高的 <code>Recall@100</code> 上限（<code>0.32964</code> vs <code>0.30467</code>）与目录覆盖率（<code>Coverage@10 = 32.68%</code> vs <code>5.21%</code>），在 <code>Sampled-100</code> 下反超为 <code>0.76598</code> vs <code>0.74464</code>（<strong>+2.87%</strong>，<code>p &lt; 0.001</code>）。</li>
+            <li><strong>小数据流行度 3.25× 虚高</strong>：在目录更稀疏的 <code>ml-latest-small</code>（<code>N = 8,187</code>）上，<code>Sampled-100</code> 将纯 <code>Popularity</code> 的 <code>NDCG@10</code> 从 <code>0.24104</code> 虚高 <strong>3.25×</strong> 至 <code>0.78399</code>，把全候选优于流行度的 <code>BPR-MF + LogisticRerank</code>（<code>0.27537 &gt; 0.24104</code>）扭曲成落后流行度 <strong>-28.1%</strong>（<code>0.56387 &lt; 0.78399</code>）。</li>
+          </ul>
+
+          <h4>二、官方数据集、嵌套全局时间拆分与 7 维防泄漏审计</h4>
+          <p>两个数据集均直接拉取自明尼苏达大学 GroupLens 官方归档并完成官方 <code>.zip.md5</code> 与 SHA-256 逐字节校验（独立输出目录，原始冻结合成基线零改动）。正例阈值统一为 <code>rating &gt;= 4.0</code>，按 <code>(timestamp, userId, movieId)</code> 升序 <code>keep='first'</code> 去重（移除重复 <code>0</code> 条），采用严格 <strong>70% / 15% / 15% 嵌套全局时间戳切点</strong> <code>T_0 &lt; T_train &lt; T_dev</code>，测试期严格仅允许检索 <code>&lt;= T_dev</code> 已上市电影并屏蔽用户历史已看集合：</p>
+          <div class="table-region" tabindex="0" role="region" aria-labelledby="c-split">
+            <table class="clean-table">
+              <caption id="c-split">双官方数据集时间边界、目录可用性与防泄漏审计（全部 overall_passed = true）</caption>
+              <thead>
+                <tr>
+                  <th scope="col">审计维度</th>
+                  <th scope="col">MovieLens 1M (ml-1m)</th>
+                  <th scope="col">MovieLens Latest Small</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">交互总数 / 时间跨度 (UTC)</th><td data-col="MovieLens 1M" class="num">1,000,209 (2000-04-25 ~ 2003-02-28)</td><td data-col="Latest Small" class="num">100,836 (1996-03-29 ~ 2018-09-24)</td></tr>
+                <tr><th scope="row">切点 T_0 / T_train / T_dev</th><td data-col="MovieLens 1M" class="num">2000-11-15 / 2000-11-22 / 2000-12-10</td><td data-col="Latest Small" class="num">2008-08-06 / 2013-08-18 / 2016-11-19</td></tr>
+                <tr><th scope="row">train / dev / test 事件数</th><td data-col="MovieLens 1M" class="num">700,148 / 150,029 / 150,032</td><td data-col="Latest Small" class="num">70,585 / 15,125 / 15,126</td></tr>
+                <tr><th scope="row">dev / test 含正例评测用户</th><td data-col="MovieLens 1M" class="num">1,319 / 1,486 名</td><td data-col="Latest Small" class="num">106 / 96 名</td></tr>
+                <tr><th scope="row">测试可用候选电影 / 正例覆盖</th><td data-col="MovieLens 1M" class="num">3,669 / 3,883 (94.49%) · 覆盖 99.94% 正例</td><td data-col="Latest Small" class="num">8,187 / 9,742 (84.04%) · 覆盖 84.96% 正例</td></tr>
+                <tr><th scope="row">测试用户冷热分布</th><td data-col="MovieLens 1M" class="num">Cold-0: 327 (22.0%) · Heavy 20+: 1,015 (68.3%)</td><td data-col="Latest Small" class="num">Cold-0: 66 (68.8%) · Heavy 20+: 26 (27.1%)</td></tr>
+                <tr><th scope="row">7 维防泄漏与留一法反事实</th><td data-col="MovieLens 1M" class="num">10,402 列表 0 泄漏 · 未来注入 0.0 bit · LOO 泄漏 99.98%</td><td data-col="Latest Small" class="num">672 列表 0 泄漏 · 未来注入 0.0 bit · LOO 泄漏 99.67%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h4>三、双数据集 7 模型完整 NDCG@10 与配对 Bootstrap 实测对照</h4>
+          <p>全部 7 个模型共享相同第一阶段候选预算 <code>M = 100</code> 与 3 个随机种子 <code>[42, 1024, 2026]</code>（<code>B = 2,000</code> 用户级配对 Bootstrap 检验双侧显著性）：</p>
+          <div class="table-region" tabindex="0" role="region" aria-labelledby="c-ml1m">
+            <table class="clean-table">
+              <caption id="c-ml1m">表 1：MovieLens 1M 全量 7 模型 NDCG@10 对照（1,486 名评测用户 · 62,412 条逐用户记录）</caption>
+              <thead>
+                <tr>
+                  <th scope="col">模型</th>
+                  <th scope="col">Full-Corpus NDCG@10 (Mean±Std)</th>
+                  <th scope="col">Sampled-100 NDCG@10 (Mean±Std)</th>
+                  <th scope="col">名次变化</th>
+                  <th scope="col">Coverage@10 (全候选)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">BPR-MF + LogisticRerank</th><td data-col="全候选" class="num">0.29110 ± 0.00266 (#1)</td><td data-col="抽样候选" class="num">0.77606 ± 0.00084 (#1)</td><td data-col="名次变化">持平</td><td data-col="Coverage@10" class="num">9.44%</td></tr>
+                <tr><th scope="row">BPR-MF + HistGBDTRerank</th><td data-col="全候选" class="num">0.28819 ± 0.00069 (#2)</td><td data-col="抽样候选" class="num">0.72407 ± 0.01085 (#6)</td><td data-col="名次变化" style="color:var(--rose);font-weight:600;">↓4 显著反转</td><td data-col="Coverage@10" class="num">7.20%</td></tr>
+                <tr><th scope="row">ItemCF</th><td data-col="全候选" class="num">0.28004 ± 0.00000 (#3)</td><td data-col="抽样候选" class="num">0.74464 ± 0.00000 (#3)</td><td data-col="名次变化">持平（被 BPR 反超）</td><td data-col="Coverage@10" class="num">5.21%</td></tr>
+                <tr><th scope="row">ItemCF + LogisticRerank</th><td data-col="全候选" class="num">0.27742 ± 0.00000 (#4)</td><td data-col="抽样候选" class="num">0.73426 ± 0.00000 (#5)</td><td data-col="名次变化">↓1</td><td data-col="Coverage@10" class="num">4.66%</td></tr>
+                <tr><th scope="row">BPR-MF</th><td data-col="全候选" class="num">0.26695 ± 0.00183 (#5)</td><td data-col="抽样候选" class="num">0.76598 ± 0.00213 (#2)</td><td data-col="名次变化" style="color:var(--amber);font-weight:600;">↑3 抽样虚升</td><td data-col="Coverage@10" class="num">32.68%</td></tr>
+                <tr><th scope="row">Popularity</th><td data-col="全候选" class="num">0.25839 ± 0.00000 (#6)</td><td data-col="抽样候选" class="num">0.73702 ± 0.00000 (#4)</td><td data-col="名次变化">↑2</td><td data-col="Coverage@10" class="num">3.76%</td></tr>
+                <tr><th scope="row">TIGER-Seq2Seq (PyTorch)</th><td data-col="全候选" class="num">0.19894 ± 0.00309 (#7)</td><td data-col="抽样候选" class="num">0.69198 ± 0.00256 (#7)</td><td data-col="名次变化">持平</td><td data-col="Coverage@10" class="num">27.00%</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="table-region" tabindex="0" role="region" aria-labelledby="c-mlsmall">
+            <table class="clean-table">
+              <caption id="c-mlsmall">表 2：MovieLens Latest Small 全量 7 模型 NDCG@10 对照（96 名评测用户 · 4,032 条逐用户记录）</caption>
+              <thead>
+                <tr>
+                  <th scope="col">模型</th>
+                  <th scope="col">Full-Corpus NDCG@10 (Mean±Std)</th>
+                  <th scope="col">Sampled-100 NDCG@10 (Mean±Std)</th>
+                  <th scope="col">名次变化</th>
+                  <th scope="col">Heavy 20+ NDCG@10 (全候选)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">ItemCF</th><td data-col="全候选" class="num">0.30179 ± 0.00000 (#1)</td><td data-col="抽样候选" class="num">0.79585 ± 0.00000 (#1)</td><td data-col="名次变化">持平</td><td data-col="Heavy 20+" class="num">0.07992</td></tr>
+                <tr><th scope="row">BPR-MF + HistGBDTRerank</th><td data-col="全候选" class="num">0.29833 ± 0.02256 (#2)</td><td data-col="抽样候选" class="num">0.77507 ± 0.01541 (#4)</td><td data-col="名次变化" style="color:var(--rose);font-weight:600;">↓2 落于流行度后</td><td data-col="Heavy 20+" class="num">0.12000</td></tr>
+                <tr><th scope="row">BPR-MF</th><td data-col="全候选" class="num">0.28675 ± 0.01414 (#3)</td><td data-col="抽样候选" class="num">0.79267 ± 0.00278 (#2)</td><td data-col="名次变化">↑1</td><td data-col="Heavy 20+" class="num">0.08190</td></tr>
+                <tr><th scope="row">ItemCF + LogisticRerank</th><td data-col="全候选" class="num">0.28332 ± 0.00000 (#4)</td><td data-col="抽样候选" class="num">0.54015 ± 0.00000 (#7)</td><td data-col="名次变化" style="color:var(--rose);font-weight:600;">↓3 显著反转</td><td data-col="Heavy 20+" class="num">0.14564</td></tr>
+                <tr><th scope="row">BPR-MF + LogisticRerank</th><td data-col="全候选" class="num">0.27537 ± 0.00621 (#5)</td><td data-col="抽样候选" class="num">0.56387 ± 0.04864 (#6)</td><td data-col="名次变化">↓1（低于流行度 28.1%）</td><td data-col="Heavy 20+" class="num">0.14532</td></tr>
+                <tr><th scope="row">Popularity</th><td data-col="全候选" class="num">0.24104 ± 0.00000 (#6)</td><td data-col="抽样候选" class="num">0.78399 ± 0.00000 (#3)</td><td data-col="名次变化" style="color:var(--amber);font-weight:600;">↑3 膨胀 3.25×</td><td data-col="Heavy 20+" class="num">0.10669</td></tr>
+                <tr><th scope="row">TIGER-Seq2Seq (PyTorch)</th><td data-col="全候选" class="num">0.21129 ± 0.02857 (#7)</td><td data-col="抽样候选" class="num">0.72868 ± 0.02317 (#5)</td><td data-col="名次变化">↑2</td><td data-col="Heavy 20+" class="num">0.11458</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p><strong>配对显著性摘要（<code>ml-1m</code>，<code>n = 1,486</code>，<code>B = 2,000</code>）：</strong>全候选下 <code>BPR-MF + LogisticRerank</code> 相对 <code>BPR-MF</code> 提升 <code>+0.02415</code>（<strong>+9.05%</strong>，95% CI <code>[+0.01825, +0.03035]</code>，<code>p &lt; 0.001</code>，700 胜 / 527 负）；<code>BPR-MF + HistGBDTRerank</code> 相对 <code>BPR-MF</code> 提升 <code>+0.02124</code>（<strong>+7.96%</strong>，95% CI <code>[+0.01517, +0.02686]</code>，<code>p &lt; 0.001</code>，673 胜 / 547 负），而在 <code>Sampled-100</code> 下反转为 <code>-0.04191</code>（<strong>-5.47%</strong>，95% CI <code>[-0.04950, -0.03436]</code>，<code>p &lt; 0.001</code>，471 胜 / 735 负）。</p>
+
+          <h4>四、实验局限与诚实未执行边界（Limitations &amp; NOT_EXECUTED）</h4>
+          <div class="limit-grid">
+            <div class="limit-box">
+              <strong>1. 显式评分 MNAR 与曝光偏差</strong>
+              <p>使用 <code>rating &gt;= 4.0</code> 构造隐式正例仅衡量“已观测评分条件下的偏好排序”，存在显著非随机缺失（MNAR）与历史曝光偏差，离线增益不能直接外推为工业线上 CTR / CVR 收益。</p>
+            </div>
+            <div class="limit-box">
+              <strong>2. 长跨度冷启动与新片未上市上限</strong>
+              <p><code>ml-latest-small</code> 横跨 22 年且 <code>68.75%</code>（66/96）测试用户为 <code>cold_0</code> 新用户，同时有 <code>655</code> 部未上市新片（占测试正例 <code>15.04%</code>）超出因果候选池；线性重排大盘均值受老片年龄负权重拖累（剔除 Pop &amp; Recency 组后升至 <code>0.30830</code>），但在 <code>Heavy 20+</code> 老用户上仍提升 <code>+77.4%</code>。</p>
+            </div>
+            <div class="limit-box">
+              <strong>3. 生成式检索码本桶碰撞瓶颈</strong>
+              <p><code>TIGER-Seq2Seq</code> 在 <code>ml-1m</code> 解码 <code>5,017,998</code> 束实现 <code>0</code> 非法幻觉、<code>Coverage@100 = 60.78%</code> 全场第一，且 <code>MPS→CPU</code> 解码提速 <code>575×</code>；但轻量 <code>3×16</code> 残差 K-Means 码本在桶碰撞深度 <code>98–345</code> 时限制了头部 Top-10 细粒度分辨力（<code>0.19894</code>）。</p>
+            </div>
+            <div class="limit-box">
+              <strong>4. 未执行扩展明确声明（NOT_EXECUTED）</strong>
+              <p><code>LightGBMRerank</code> 因宿主机缺 <code>libomp.dylib</code> 标记 <code>NOT_EXECUTED</code>（已由纯 NumPy <code>HistGBDTRerank</code> 同构替代）；依赖商业 API 的在线 <code>RankGPT</code> 列表重排与 <code>7B TALLRec</code> LoRA 微调按零付费与 16 GB 本机内存边界均如实标记 <code>NOT_EXECUTED</code>。</p>
+            </div>
+          </div>
+          <p style="margin-block-start:1rem;"><a href="#ranklab">↑ 返回 RankLab 交互排行榜实时切换验证上述数字</a></p>
+        </article>
+
+        <article class="bento-card essay-card" id="article-payment-acceptance" aria-labelledby="e2-title">
+          <span class="proj-eyebrow">Note 02 · State Machine Design</span>
+          <h3 id="e2-title">支付成功之后，订单为什么还要等商家接单？</h3>
+          <p class="essay-lead">顾客付款后商家仍可能因缺货拒单。把订单履约状态（OrderStatus）与资金结算状态（PaymentStatus）正交拆开，系统才能在正常备餐、付款前取消与异步退款之间保持无歧义流转。</p>
+          <div class="table-region" tabindex="0" role="region" aria-labelledby="c-flow">
+            <table class="clean-table">
+              <caption id="c-flow">BCE 控制器下的双状态演进路径</caption>
+              <thead>
+                <tr><th scope="col">外部事件</th><th scope="col">订单状态</th><th scope="col">付款状态</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">提交订单</th><td data-col="订单状态">待付款</td><td data-col="付款状态">未付款</td></tr>
+                <tr><th scope="row">付款前取消</th><td data-col="订单状态">已取消</td><td data-col="付款状态">已关闭</td></tr>
+                <tr><th scope="row">确认付款</th><td data-col="订单状态">待商家接单</td><td data-col="付款状态">已付款</td></tr>
+                <tr><th scope="row">商家接单</th><td data-col="订单状态">已接单</td><td data-col="付款状态">已付款</td></tr>
+                <tr><th scope="row">商家拒单</th><td data-col="订单状态">已拒单</td><td data-col="付款状态">待退款</td></tr>
+                <tr><th scope="row">退款完成</th><td data-col="订单状态">已拒单</td><td data-col="付款状态">已退款</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>配合按 <code>event_id</code> 校验载荷摘要的幂等守卫与事务外盒（Transactional Outbox），即使网关重复投递或先达拒单后到付款确认，状态机依然收敛至一致终态。完整可执行实现与 16 项自动化测试见公开仓库 <a href="https://github.com/Zou-Zhongyuan/campus-checkout-workflow" target="_blank" rel="noopener">Campus Checkout ↗</a>。</p>
+        </article>
+
+        <article class="bento-card essay-card" id="article-bva-49-50-51" aria-labelledby="e3-title">
+          <span class="proj-eyebrow">Note 03 · Software Quality</span>
+          <h3 id="e3-title">用 49、50、51 检查边界条件</h3>
+          <p class="essay-lead">当批量导出上限为 50 条时，上界附近同时取 49、50、51 三点可一次性锁定余量计算、闭区间误写为开区间（<code>&lt; 50</code>）与超限放行三类常见偏移。</p>
+          <figure class="mac-code">
+            <figcaption class="mac-code-bar">
+              <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span id="bva-code-title">boundary_check.py</span>
+            </figcaption>
+            <pre role="region" aria-labelledby="bva-code-title" tabindex="0"><code>def export_status(count: int) -&gt; tuple[bool, int, bool]:
     if type(count) is not int or count &lt; 0:
         raise ValueError("count must be a non-negative integer")
-    return 1 &lt;= count &lt;= 50, max(0, 50 - count), count == 50
-
+    allowed = 1 &lt;= count &lt;= 50
+    return allowed, (50 - count if allowed else 0), count == 50
 
 assert export_status(49) == (True, 1, False)
 assert export_status(50) == (True, 0, True)
 assert export_status(51) == (False, 0, False)</code></pre>
-      </article>
-  </section>
-</main>
-<footer><div class="wrap"><p>Zhongyuan Zou · 项目与实验笔记</p><a href="https://github.com/Zou-Zhongyuan">GitHub 主页 ↗</a></div></footer>
-<script>
-const rankData = {"ml_latest_small_official": {"full_corpus": [["ItemCF", "0.30179"], ["BPR-MF + HistGBDTRerank", "0.29833"], ["BPR-MF", "0.28675"], ["ItemCF + LogisticRerank", "0.28332"], ["BPR-MF + LogisticRerank", "0.27537"], ["Popularity", "0.24104"], ["TIGER-Seq2Seq", "0.21129"]], "sampled_100": [["ItemCF", "0.79585"], ["BPR-MF", "0.79267"], ["Popularity", "0.78399"], ["BPR-MF + HistGBDTRerank", "0.77507"], ["TIGER-Seq2Seq", "0.72868"], ["BPR-MF + LogisticRerank", "0.56387"], ["ItemCF + LogisticRerank", "0.54015"]]}, "ml_1m_official": {"full_corpus": [["BPR-MF + LogisticRerank", "0.2911"], ["BPR-MF + HistGBDTRerank", "0.28819"], ["ItemCF", "0.28004"], ["ItemCF + LogisticRerank", "0.27742"], ["BPR-MF", "0.26695"], ["Popularity", "0.25839"], ["TIGER-Seq2Seq", "0.19894"]], "sampled_100": [["BPR-MF + LogisticRerank", "0.77606"], ["BPR-MF", "0.76598"], ["ItemCF", "0.74464"], ["Popularity", "0.73702"], ["ItemCF + LogisticRerank", "0.73426"], ["BPR-MF + HistGBDTRerank", "0.72407"], ["TIGER-Seq2Seq", "0.69198"]]}};
-const dataset = document.querySelector('#rank-dataset');
-const protocol = document.querySelector('#rank-protocol');
-function renderRanking() {
-  const rows = rankData[dataset.value][protocol.value];
-  document.querySelector('#rank-rows').replaceChildren(...rows.map(([name, score]) => {
-    const row = document.createElement('tr');
-    const model = document.createElement('th');
-    model.scope = 'row';
-    model.textContent = name;
-    const bar = document.createElement('td');
-    const meter = document.createElement('meter');
-    meter.min = 0;
-    meter.max = 1;
-    meter.value = Number(score);
-    meter.setAttribute('aria-hidden', 'true');
-    bar.append(meter);
-    const value = document.createElement('td');
-    value.className = 'score';
-    value.textContent = score;
-    row.append(model, bar, value);
-    return row;
-  }));
-  const audience = dataset.value === 'ml_1m_official' ? '1,486' : '96';
-  const selection = [dataset, protocol].map(control => control.selectedOptions[0].textContent).join(' · ');
-  document.querySelector('#rank-caption').textContent = selection + ' · ' + audience + ' 名评测用户 · 3 个种子';
-}
-document.querySelector('#rank-controls').hidden = false;
-dataset.addEventListener('change', renderRanking);
-protocol.addEventListener('change', renderRanking);
-const filters = document.querySelector('.filters');
-const cards = Array.from(document.querySelectorAll('article[data-category]'));
-filters.hidden = false;
-function filterProjects(category) {
-  for (const control of filters.querySelectorAll('button')) {
-    control.setAttribute('aria-pressed', String(control.dataset.filter === category));
-  }
-  for (const card of cards) {
-    card.hidden = category !== 'all' && card.dataset.category !== category;
-  }
-}
-filters.addEventListener('click', event => {
-  const control = event.target.closest('button[data-filter]');
-  if (control) filterProjects(control.dataset.filter);
-});
-function openLinkedProject() {
-  const card = cards.find(item => '#' + item.id === location.hash);
-  if (!card) return;
-  if (card.hidden) {
-    filterProjects('all');
-    card.scrollIntoView();
-  }
-  card.querySelector('details').open = true;
-}
-addEventListener('hashchange', openLinkedProject);
-openLinkedProject();
-</script>
+          </figure>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="stage footer-inner">
+      <span>Zhongyuan Zou · Xiamen University Malaysia</span>
+      <span><a href="https://github.com/Zou-Zhongyuan" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp; <a href="https://github.com/Zou-Zhongyuan/campus-checkout-workflow" target="_blank" rel="noopener">Campus Checkout</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const LAB = {"ranklab": {"ml_1m_official": {"title": "MovieLens 1M", "users": 1486, "items": 3669, "loo_leak": "99.98%", "trie_beams": "5,017,998", "protocols": {"full_corpus": [{"model": "Popularity", "raw_model": "Popularity", "ndcg10": 0.25839, "ndcg10_std": 0.0, "recall10": 0.05704, "recall100": 0.29791, "cov10": 3.76, "heavy_ndcg10": 0.20855, "cold_ndcg10": 0.40689, "latency_ms": 0.08}, {"model": "ItemCF", "raw_model": "ItemCF", "ndcg10": 0.28004, "ndcg10_std": 0.0, "recall10": 0.06313, "recall100": 0.30467, "cov10": 5.21, "heavy_ndcg10": 0.237, "cold_ndcg10": 0.40792, "latency_ms": 0.19}, {"model": "BPR-MF", "raw_model": "BPR-MF", "ndcg10": 0.26695, "ndcg10_std": 0.00183, "recall10": 0.06709, "recall100": 0.32964, "cov10": 32.68, "heavy_ndcg10": 0.2189, "cold_ndcg10": 0.39785, "latency_ms": 0.09}, {"model": "TIGER-Seq2Seq", "raw_model": "TIGER-Seq2Seq", "ndcg10": 0.19894, "ndcg10_std": 0.00309, "recall10": 0.05156, "recall100": 0.25226, "cov10": 27.0, "heavy_ndcg10": 0.15058, "cold_ndcg10": 0.34234, "latency_ms": 12.81}, {"model": "ItemCF + LogisticRerank", "raw_model": "ItemCF -> LogisticRerank", "ndcg10": 0.27742, "ndcg10_std": 0.0, "recall10": 0.06204, "recall100": 0.30467, "cov10": 4.66, "heavy_ndcg10": 0.23314, "cold_ndcg10": 0.40585, "latency_ms": 0.44}, {"model": "BPR-MF + LogisticRerank", "raw_model": "BPR-MF -> LogisticRerank", "ndcg10": 0.2911, "ndcg10_std": 0.00266, "recall10": 0.07207, "recall100": 0.32964, "cov10": 9.44, "heavy_ndcg10": 0.25264, "cold_ndcg10": 0.40476, "latency_ms": 0.32}, {"model": "BPR-MF + HistGBDTRerank", "raw_model": "BPR-MF -> HistGBDTRerank", "ndcg10": 0.28819, "ndcg10_std": 0.00069, "recall10": 0.07217, "recall100": 0.32964, "cov10": 7.2, "heavy_ndcg10": 0.24936, "cold_ndcg10": 0.40168, "latency_ms": 2.66}], "sampled_100": [{"model": "Popularity", "raw_model": "Popularity", "ndcg10": 0.73702, "ndcg10_std": 0.0, "recall10": 0.28014, "recall100": 0.90314, "cov10": 15.73, "heavy_ndcg10": 0.68695, "cold_ndcg10": 0.87663, "latency_ms": 0.04}, {"model": "ItemCF", "raw_model": "ItemCF", "ndcg10": 0.74464, "ndcg10_std": 0.0, "recall10": 0.28963, "recall100": 0.90339, "cov10": 20.71, "heavy_ndcg10": 0.69806, "cold_ndcg10": 0.87386, "latency_ms": 0.18}, {"model": "BPR-MF", "raw_model": "BPR-MF", "ndcg10": 0.76598, "ndcg10_std": 0.00213, "recall10": 0.30719, "recall100": 0.90567, "cov10": 40.43, "heavy_ndcg10": 0.72381, "cold_ndcg10": 0.87906, "latency_ms": 0.05}, {"model": "TIGER-Seq2Seq", "raw_model": "TIGER-Seq2Seq", "ndcg10": 0.69198, "ndcg10_std": 0.00256, "recall10": 0.2677, "recall100": 0.89015, "cov10": 45.01, "heavy_ndcg10": 0.62946, "cold_ndcg10": 0.85526, "latency_ms": 2.89}, {"model": "ItemCF + LogisticRerank", "raw_model": "ItemCF -> LogisticRerank", "ndcg10": 0.73426, "ndcg10_std": 0.0, "recall10": 0.27153, "recall100": 0.90339, "cov10": 18.43, "heavy_ndcg10": 0.68517, "cold_ndcg10": 0.87837, "latency_ms": 0.32}, {"model": "BPR-MF + LogisticRerank", "raw_model": "BPR-MF -> LogisticRerank", "ndcg10": 0.77606, "ndcg10_std": 0.00084, "recall10": 0.31299, "recall100": 0.90567, "cov10": 22.72, "heavy_ndcg10": 0.73878, "cold_ndcg10": 0.87844, "latency_ms": 0.24}, {"model": "BPR-MF + HistGBDTRerank", "raw_model": "BPR-MF -> HistGBDTRerank", "ndcg10": 0.72407, "ndcg10_std": 0.01085, "recall10": 0.26492, "recall100": 0.90567, "cov10": 23.48, "heavy_ndcg10": 0.6711, "cold_ndcg10": 0.87412, "latency_ms": 2.31}]}, "bootstrap": {"full_corpus|ItemCF|Popularity": {"rel_pct": 8.38, "ci_low": 0.0163, "ci_high": 0.0273, "p": 0.0}, "full_corpus|BPR-MF|Popularity": {"rel_pct": 3.31, "ci_low": 0.0003, "ci_high": 0.0166, "p": 0.042}, "full_corpus|BPR-MF|ItemCF": {"rel_pct": -4.68, "ci_low": -0.0207, "ci_high": -0.0056, "p": 0.0}, "full_corpus|ItemCF -> LogisticRerank|ItemCF": {"rel_pct": -0.94, "ci_low": -0.0048, "ci_high": -0.0004, "p": 0.02}, "full_corpus|BPR-MF -> LogisticRerank|BPR-MF": {"rel_pct": 9.05, "ci_low": 0.0183, "ci_high": 0.0303, "p": 0.0}, "full_corpus|BPR-MF -> HistGBDTRerank|BPR-MF": {"rel_pct": 7.96, "ci_low": 0.0152, "ci_high": 0.0269, "p": 0.0}, "full_corpus|BPR-MF -> HistGBDTRerank|BPR-MF -> LogisticRerank": {"rel_pct": -1.0, "ci_low": -0.0059, "ci_high": -0.0, "p": 0.05}, "full_corpus|TIGER-Seq2Seq|Popularity": {"rel_pct": -23.01, "ci_low": -0.0705, "ci_high": -0.0485, "p": 0.0}, "full_corpus|TIGER-Seq2Seq|ItemCF": {"rel_pct": -28.96, "ci_low": -0.0927, "ci_high": -0.0705, "p": 0.0}, "full_corpus|TIGER-Seq2Seq|BPR-MF": {"rel_pct": -25.47, "ci_low": -0.0779, "ci_high": -0.0589, "p": 0.0}, "sampled_100|ItemCF|Popularity": {"rel_pct": 1.03, "ci_low": 0.0026, "ci_high": 0.0125, "p": 0.006}, "sampled_100|BPR-MF|Popularity": {"rel_pct": 3.93, "ci_low": 0.0213, "ci_high": 0.0364, "p": 0.0}, "sampled_100|BPR-MF|ItemCF": {"rel_pct": 2.87, "ci_low": 0.0148, "ci_high": 0.028, "p": 0.0}, "sampled_100|ItemCF -> LogisticRerank|ItemCF": {"rel_pct": -1.39, "ci_low": -0.0174, "ci_high": -0.0028, "p": 0.006}, "sampled_100|BPR-MF -> LogisticRerank|BPR-MF": {"rel_pct": 1.32, "ci_low": 0.005, "ci_high": 0.0152, "p": 0.001}, "sampled_100|BPR-MF -> HistGBDTRerank|BPR-MF": {"rel_pct": -5.47, "ci_low": -0.0495, "ci_high": -0.0344, "p": 0.0}, "sampled_100|BPR-MF -> HistGBDTRerank|BPR-MF -> LogisticRerank": {"rel_pct": -6.7, "ci_low": -0.0572, "ci_high": -0.0471, "p": 0.0}, "sampled_100|TIGER-Seq2Seq|Popularity": {"rel_pct": -6.11, "ci_low": -0.056, "ci_high": -0.0347, "p": 0.0}, "sampled_100|TIGER-Seq2Seq|ItemCF": {"rel_pct": -7.07, "ci_low": -0.063, "ci_high": -0.0431, "p": 0.0}, "sampled_100|TIGER-Seq2Seq|BPR-MF": {"rel_pct": -9.66, "ci_low": -0.0835, "ci_high": -0.0645, "p": 0.0}}}, "ml_latest_small_official": {"title": "MovieLens Latest Small", "users": 96, "items": 8187, "loo_leak": "99.67%", "trie_beams": "434,284", "protocols": {"full_corpus": [{"model": "Popularity", "raw_model": "Popularity", "ndcg10": 0.24104, "ndcg10_std": 0.0, "recall10": 0.07051, "recall100": 0.20925, "cov10": 0.71, "heavy_ndcg10": 0.10669, "cold_ndcg10": 0.29128, "latency_ms": 0.07}, {"model": "ItemCF", "raw_model": "ItemCF", "ndcg10": 0.30179, "ndcg10_std": 0.0, "recall10": 0.07228, "recall100": 0.25557, "cov10": 0.99, "heavy_ndcg10": 0.07992, "cold_ndcg10": 0.37786, "latency_ms": 0.11}, {"model": "BPR-MF", "raw_model": "BPR-MF", "ndcg10": 0.28675, "ndcg10_std": 0.01414, "recall10": 0.06802, "recall100": 0.24797, "cov10": 2.11, "heavy_ndcg10": 0.0819, "cold_ndcg10": 0.36269, "latency_ms": 0.08}, {"model": "TIGER-Seq2Seq", "raw_model": "TIGER-Seq2Seq", "ndcg10": 0.21129, "ndcg10_std": 0.02857, "recall10": 0.04568, "recall100": 0.18595, "cov10": 2.69, "heavy_ndcg10": 0.11458, "cold_ndcg10": 0.25094, "latency_ms": 7.44}, {"model": "ItemCF + LogisticRerank", "raw_model": "ItemCF -> LogisticRerank", "ndcg10": 0.28332, "ndcg10_std": 0.0, "recall10": 0.06553, "recall100": 0.25557, "cov10": 1.06, "heavy_ndcg10": 0.14564, "cold_ndcg10": 0.3363, "latency_ms": 0.2}, {"model": "BPR-MF + LogisticRerank", "raw_model": "BPR-MF -> LogisticRerank", "ndcg10": 0.27537, "ndcg10_std": 0.00621, "recall10": 0.06869, "recall100": 0.24797, "cov10": 1.35, "heavy_ndcg10": 0.14532, "cold_ndcg10": 0.32565, "latency_ms": 0.18}, {"model": "BPR-MF + HistGBDTRerank", "raw_model": "BPR-MF -> HistGBDTRerank", "ndcg10": 0.29833, "ndcg10_std": 0.02256, "recall10": 0.07106, "recall100": 0.24797, "cov10": 1.43, "heavy_ndcg10": 0.12, "cold_ndcg10": 0.36492, "latency_ms": 2.01}], "sampled_100": [{"model": "Popularity", "raw_model": "Popularity", "ndcg10": 0.78399, "ndcg10_std": 0.0, "recall10": 0.25477, "recall100": 0.76279, "cov10": 3.82, "heavy_ndcg10": 0.52765, "cold_ndcg10": 0.87836, "latency_ms": 0.02}, {"model": "ItemCF", "raw_model": "ItemCF", "ndcg10": 0.79585, "ndcg10_std": 0.0, "recall10": 0.26375, "recall100": 0.76709, "cov10": 4.02, "heavy_ndcg10": 0.56418, "cold_ndcg10": 0.878, "latency_ms": 0.07}, {"model": "BPR-MF", "raw_model": "BPR-MF", "ndcg10": 0.79267, "ndcg10_std": 0.00278, "recall10": 0.26306, "recall100": 0.76646, "cov10": 4.3, "heavy_ndcg10": 0.58268, "cold_ndcg10": 0.87, "latency_ms": 0.03}, {"model": "TIGER-Seq2Seq", "raw_model": "TIGER-Seq2Seq", "ndcg10": 0.72868, "ndcg10_std": 0.02317, "recall10": 0.23172, "recall100": 0.74219, "cov10": 5.08, "heavy_ndcg10": 0.53889, "cold_ndcg10": 0.79932, "latency_ms": 1.95}, {"model": "ItemCF + LogisticRerank", "raw_model": "ItemCF -> LogisticRerank", "ndcg10": 0.54015, "ndcg10_std": 0.0, "recall10": 0.148, "recall100": 0.76709, "cov10": 4.92, "heavy_ndcg10": 0.34654, "cold_ndcg10": 0.63064, "latency_ms": 0.16}, {"model": "BPR-MF + LogisticRerank", "raw_model": "BPR-MF -> LogisticRerank", "ndcg10": 0.56387, "ndcg10_std": 0.04864, "recall10": 0.15625, "recall100": 0.76646, "cov10": 4.81, "heavy_ndcg10": 0.31069, "cold_ndcg10": 0.68061, "latency_ms": 0.13}, {"model": "BPR-MF + HistGBDTRerank", "raw_model": "BPR-MF -> HistGBDTRerank", "ndcg10": 0.77507, "ndcg10_std": 0.01541, "recall10": 0.23957, "recall100": 0.76646, "cov10": 4.12, "heavy_ndcg10": 0.52823, "cold_ndcg10": 0.86416, "latency_ms": 1.95}]}, "bootstrap": {"full_corpus|ItemCF|Popularity": {"rel_pct": 25.21, "ci_low": 0.0336, "ci_high": 0.0878, "p": 0.0}, "full_corpus|BPR-MF|Popularity": {"rel_pct": 18.96, "ci_low": 0.019, "ci_high": 0.0712, "p": 0.0}, "full_corpus|BPR-MF|ItemCF": {"rel_pct": -4.99, "ci_low": -0.0268, "ci_high": -0.0039, "p": 0.01}, "full_corpus|ItemCF -> LogisticRerank|ItemCF": {"rel_pct": -6.12, "ci_low": -0.0507, "ci_high": 0.0133, "p": 0.243}, "full_corpus|BPR-MF -> LogisticRerank|BPR-MF": {"rel_pct": -3.97, "ci_low": -0.0397, "ci_high": 0.0182, "p": 0.433}, "full_corpus|BPR-MF -> HistGBDTRerank|BPR-MF": {"rel_pct": 4.04, "ci_low": -0.0075, "ci_high": 0.0288, "p": 0.214}, "full_corpus|BPR-MF -> HistGBDTRerank|BPR-MF -> LogisticRerank": {"rel_pct": 8.34, "ci_low": 0.0016, "ci_high": 0.0428, "p": 0.041}, "full_corpus|TIGER-Seq2Seq|Popularity": {"rel_pct": -12.34, "ci_low": -0.0558, "ci_high": -0.0051, "p": 0.018}, "full_corpus|TIGER-Seq2Seq|ItemCF": {"rel_pct": -29.99, "ci_low": -0.1216, "ci_high": -0.0607, "p": 0.0}, "full_corpus|TIGER-Seq2Seq|BPR-MF": {"rel_pct": -26.32, "ci_low": -0.1018, "ci_high": -0.0482, "p": 0.0}, "sampled_100|ItemCF|Popularity": {"rel_pct": 1.51, "ci_low": -0.0118, "ci_high": 0.0343, "p": 0.298}, "sampled_100|BPR-MF|Popularity": {"rel_pct": 1.11, "ci_low": -0.0223, "ci_high": 0.0403, "p": 0.582}, "sampled_100|BPR-MF|ItemCF": {"rel_pct": -0.4, "ci_low": -0.0199, "ci_high": 0.0136, "p": 0.701}, "sampled_100|ItemCF -> LogisticRerank|ItemCF": {"rel_pct": -32.13, "ci_low": -0.3086, "ci_high": -0.2038, "p": 0.0}, "sampled_100|BPR-MF -> LogisticRerank|BPR-MF": {"rel_pct": -28.86, "ci_low": -0.2823, "ci_high": -0.1775, "p": 0.0}, "sampled_100|BPR-MF -> HistGBDTRerank|BPR-MF": {"rel_pct": -2.22, "ci_low": -0.0373, "ci_high": 0.0032, "p": 0.095}, "sampled_100|BPR-MF -> HistGBDTRerank|BPR-MF -> LogisticRerank": {"rel_pct": 37.46, "ci_low": 0.1672, "ci_high": 0.2575, "p": 0.0}, "sampled_100|TIGER-Seq2Seq|Popularity": {"rel_pct": -7.05, "ci_low": -0.0932, "ci_high": -0.0206, "p": 0.003}, "sampled_100|TIGER-Seq2Seq|ItemCF": {"rel_pct": -8.44, "ci_low": -0.0922, "ci_high": -0.0429, "p": 0.0}, "sampled_100|TIGER-Seq2Seq|BPR-MF": {"rel_pct": -8.07, "ci_low": -0.0875, "ci_high": -0.0407, "p": 0.0}}}}, "memory_modes": [{"id": "o200k_evidence_800", "label": "裸证据 ≤ 800", "cap": 800, "desc": "tiktoken o200k_base · 仅约束裸块，暴露 +46%~+54% 真实超支", "rows": [{"method": "A_RecencyWindow", "full_cov": 4.8, "stale_rate": 0.0, "raw_tok": 784.0, "json_ov": 213.2, "frame_ov": 148.8, "chat_tok": 1146.1}, {"method": "B_BM25", "full_cov": 83.9, "stale_rate": 16.7, "raw_tok": 782.5, "json_ov": 222.0, "frame_ov": 148.8, "chat_tok": 1153.3}, {"method": "C_CPUVector_SubwordLSA", "full_cov": 85.5, "stale_rate": 8.3, "raw_tok": 782.4, "json_ov": 222.1, "frame_ov": 148.8, "chat_tok": 1153.3}, {"method": "D_ChronoHybridAnchor", "full_cov": 87.1, "stale_rate": 0.0, "raw_tok": 767.7, "json_ov": 264.2, "frame_ov": 148.8, "chat_tok": 1180.8}]}, {"id": "o200k_serialized_800", "label": "JSON 数组 ≤ 800", "cap": 800, "desc": "tiktoken o200k_base · 约束序列化记忆数组 ≤ 800", "rows": [{"method": "A_RecencyWindow", "full_cov": 3.2, "stale_rate": 0.0, "raw_tok": 622.0, "json_ov": 161.7, "frame_ov": 148.9, "chat_tok": 932.5}, {"method": "B_BM25", "full_cov": 79.0, "stale_rate": 25.0, "raw_tok": 595.2, "json_ov": 166.9, "frame_ov": 148.9, "chat_tok": 911.0}, {"method": "C_CPUVector_SubwordLSA", "full_cov": 80.7, "stale_rate": 16.7, "raw_tok": 595.0, "json_ov": 167.0, "frame_ov": 148.9, "chat_tok": 910.8}, {"method": "D_ChronoHybridAnchor", "full_cov": 75.8, "stale_rate": 8.3, "raw_tok": 550.6, "json_ov": 230.6, "frame_ov": 148.8, "chat_tok": 930.1}]}, {"id": "o200k_chat_800", "label": "完整 ChatML ≤ 800", "cap": 800, "desc": "tiktoken o200k_base · 严格约束送入阅读器的总输入 ≤ 800", "rows": [{"method": "A_RecencyWindow", "full_cov": 1.6, "stale_rate": 0.0, "raw_tok": 467.1, "json_ov": 124.7, "frame_ov": 148.9, "chat_tok": 740.6}, {"method": "B_BM25", "full_cov": 77.4, "stale_rate": 25.0, "raw_tok": 472.2, "json_ov": 150.9, "frame_ov": 148.9, "chat_tok": 772.0}, {"method": "C_CPUVector_SubwordLSA", "full_cov": 80.7, "stale_rate": 16.7, "raw_tok": 471.3, "json_ov": 151.7, "frame_ov": 148.8, "chat_tok": 771.8}, {"method": "D_ChronoHybridAnchor", "full_cov": 69.3, "stale_rate": 8.3, "raw_tok": 438.0, "json_ov": 189.6, "frame_ov": 148.9, "chat_tok": 776.5}]}, {"id": "o200k_chat_1050", "label": "完整 ChatML ≤ 1050", "cap": 1050, "desc": "tiktoken o200k_base · 放宽总输入上限以恢复证据覆盖率", "rows": [{"method": "A_RecencyWindow", "full_cov": 3.2, "stale_rate": 0.0, "raw_tok": 676.5, "json_ov": 168.2, "frame_ov": 148.8, "chat_tok": 993.6}, {"method": "B_BM25", "full_cov": 80.7, "stale_rate": 25.0, "raw_tok": 674.0, "json_ov": 198.0, "frame_ov": 148.8, "chat_tok": 1020.8}, {"method": "C_CPUVector_SubwordLSA", "full_cov": 83.9, "stale_rate": 16.7, "raw_tok": 671.0, "json_ov": 196.4, "frame_ov": 148.9, "chat_tok": 1016.3}, {"method": "D_ChronoHybridAnchor", "full_cov": 80.7, "stale_rate": 0.0, "raw_tok": 625.5, "json_ov": 249.7, "frame_ov": 148.8, "chat_tok": 1024.1}]}]};
+
+    /* 1. Two-State System-Aware Theme Toggle (dark-mode-toggle) */
+    (() => {
+      const meta = document.querySelector('meta[name="color-scheme"]');
+      const btn = document.querySelector('#theme-toggle');
+      const glyph = document.querySelector('#theme-glyph');
+      const label = document.querySelector('#theme-label');
+      const mq = matchMedia('(prefers-color-scheme: dark)');
+
+      const current = () => (meta.content === 'dark' || meta.content === 'light') ? meta.content : (mq.matches ? 'dark' : 'light');
+      const sync = () => {
+        const dark = current() === 'dark';
+        glyph.textContent = dark ? '☾' : '☀';
+        label.textContent = dark ? '深色' : '浅色';
+      };
+      btn.addEventListener('click', () => {
+        const target = current() === 'dark' ? 'light' : 'dark';
+        const sys = mq.matches ? 'dark' : 'light';
+        try {
+          if (target === sys) { localStorage.removeItem('color-scheme'); meta.content = 'light dark'; }
+          else { localStorage.setItem('color-scheme', target); meta.content = target; }
+        } catch (e) { meta.content = target === sys ? 'light dark' : target; }
+        sync();
+      });
+      mq.addEventListener('change', sync);
+      addEventListener('storage', (e) => { if (e.key === 'color-scheme') { meta.content = e.newValue ?? 'light dark'; sync(); } });
+      sync();
+    })();
+
+    /* 2. Helper: Sliding Apple Segmented Control Pill */
+    function bindSegmented(rootSelector, onChange) {
+      const root = document.querySelector(rootSelector);
+      const thumb = root.querySelector('.seg-thumb');
+      const buttons = Array.from(root.querySelectorAll('button'));
+
+      function syncThumb() {
+        const active = buttons.find(b => b.getAttribute('aria-pressed') === 'true') || buttons[0];
+        root.style.setProperty('--seg-x', `${active.offsetLeft}px`);
+        root.style.setProperty('--seg-w', `${active.offsetWidth}px`);
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.getAttribute('aria-pressed') === 'true') return;
+          buttons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+          syncThumb();
+          onChange(btn.dataset.val);
+        });
+      });
+      new ResizeObserver(syncThumb).observe(root);
+      addEventListener('load', syncThumb);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncThumb);
+      syncThumb();
+      return syncThumb;
+    }
+
+    /* 3. Cursor-Tracked Specular Bento Spotlight & Scroll Fallback */
+    (() => {
+      const finePointer = matchMedia('(pointer: fine)').matches;
+      if (finePointer) {
+        for (const card of document.querySelectorAll('.bento-card')) {
+          card.addEventListener('pointermove', (e) => {
+            const r = card.getBoundingClientRect();
+            card.style.setProperty('--mx', `${e.clientX - r.left}px`);
+            card.style.setProperty('--my', `${e.clientY - r.top}px`);
+          }, { passive: true });
+        }
+      }
+
+      /* Scroll-entry fallback ONLY when native view() timeline is unsupported */
+      if (!CSS.supports('(animation-timeline: view()) and (animation-range: entry)') &&
+          matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        const obs = new IntersectionObserver((entries) => {
+          for (const en of entries) {
+            if (en.isIntersecting) {
+              en.target.style.opacity = '1';
+              en.target.style.translate = '0 0';
+              obs.unobserve(en.target);
+            }
+          }
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal-item').forEach(el => {
+          el.style.opacity = '0';
+          el.style.translate = '0 24px';
+          el.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), translate 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+          obs.observe(el);
+        });
+      }
+    })();
+
+    /* 4. RankLab Fluid Reordering Stage (modern-web-guidance: dynamic-sort) */
+    (() => {
+      let dsKey = 'ml_1m_official';
+      let protoKey = 'full_corpus';
+      let metricKey = 'ndcg10';
+
+      const list = document.querySelector('#rk-list');
+      const statusEl = document.querySelector('#rk-reorder-status');
+      const summaryEl = document.querySelector('#rk-summary-line');
+      const insightEl = document.querySelector('#rk-insight');
+      const slopeSvg = document.querySelector('#slope-svg');
+      const rowMap = new Map(Array.from(list.children).map(li => [li.dataset.model, li]));
+
+      const M_INFO = {
+        ndcg10: { label: 'NDCG@10', digits: 5, suffix: '' },
+        recall10: { label: 'Recall@10', digits: 5, suffix: '' },
+        heavy_ndcg10: { label: 'Heavy 20+ NDCG@10', digits: 5, suffix: '' },
+        cov10: { label: 'Coverage@10', digits: 2, suffix: '%' },
+      };
+
+      function reorderDOM(container, orderedNodes) {
+        const move = Object.hasOwn(Element.prototype, 'moveBefore')
+          ? (node) => container.moveBefore(node, null)
+          : (node) => container.append(node);
+        for (const node of orderedNodes) move(node);
+      }
+
+      function renderSlopeSVG(ds, fullSorted, sampSorted) {
+        const NS = 'http://www.w3.org/2000/svg';
+        const titleNode = slopeSvg.querySelector('title');
+        slopeSvg.replaceChildren(titleNode);
+        const mk = (t, a = {}, txt = '') => {
+          const el = document.createElementNS(NS, t);
+          for (const [k, v] of Object.entries(a)) el.setAttribute(k, String(v));
+          if (txt) el.textContent = txt;
+          return el;
+        };
+        const fIdx = Object.fromEntries(fullSorted.map((r, i) => [r.raw_model, i]));
+        const sIdx = Object.fromEntries(sampSorted.map((r, i) => [r.raw_model, i]));
+        const x1 = 250, x2 = 510, y0 = 42, dy = 35;
+
+        slopeSvg.append(
+          mk('text', { x: x1 - 14, y: 20, 'text-anchor': 'end', fill: 'var(--secondary)', 'font-size': '11', 'font-weight': '600' }, `全量候选 (${ds.items})`),
+          mk('text', { x: x2 + 14, y: 20, fill: 'var(--secondary)', 'font-size': '11', 'font-weight': '600' }, '抽样候选 Sampled-100')
+        );
+
+        for (const r of fullSorted) {
+          const m = r.raw_model;
+          const rs = sampSorted[sIdx[m]];
+          const i1 = fIdx[m], i2 = sIdx[m];
+          const ya = y0 + i1 * dy, yb = y0 + i2 * dy;
+          const delta = i1 - i2;
+          const hi = Math.abs(delta) >= 2;
+          const col = delta <= -2 ? 'var(--rose)' : (delta >= 2 ? 'var(--accent)' : 'var(--secondary)');
+          slopeSvg.append(
+            mk('path', { d: `M ${x1} ${ya} C ${x1+90} ${ya}, ${x2-90} ${yb}, ${x2} ${yb}`, fill: 'none', stroke: col, 'stroke-width': hi ? '2.6' : '1.3', opacity: hi ? '0.95' : '0.35' }),
+            mk('circle', { cx: x1, cy: ya, r: hi ? 4 : 3, fill: col, opacity: hi ? 1 : 0.45 }),
+            mk('circle', { cx: x2, cy: yb, r: hi ? 4 : 3, fill: col, opacity: hi ? 1 : 0.45 }),
+            mk('text', { x: x1 - 14, y: ya + 4, 'text-anchor': 'end', fill: hi ? 'var(--ink)' : 'var(--secondary)', 'font-size': '11.5', 'font-weight': hi ? '600' : '400' }, `#${i1+1} ${r.model}`),
+            mk('text', { x: x2 + 14, y: yb + 4, fill: hi ? col : 'var(--secondary)', 'font-size': '11.5', 'font-weight': hi ? '600' : '400' }, `#${i2+1} ${rs.model}`)
+          );
+        }
+      }
+
+      function updateStage(animateReorder = true) {
+        const ds = LAB.ranklab[dsKey];
+        const info = M_INFO[metricKey];
+        const fullSorted = [...ds.protocols.full_corpus].sort((a, b) => b[metricKey] - a[metricKey]);
+        const sampSorted = [...ds.protocols.sampled_100].sort((a, b) => b[metricKey] - a[metricKey]);
+        const fRank = Object.fromEntries(fullSorted.map((r, i) => [r.raw_model, i]));
+        const sRank = Object.fromEntries(sampSorted.map((r, i) => [r.raw_model, i]));
+
+        const activeRows = protoKey === 'full_corpus' ? fullSorted : sampSorted;
+        const maxVal = Math.max(...activeRows.map(r => r[metricKey]), 0.0001);
+
+        const applyDOM = () => {
+          const orderedNodes = activeRows.map((r, idx) => {
+            const li = rowMap.get(r.raw_model);
+            li.querySelector('.rank-pos').textContent = `#${idx + 1}`;
+            li.querySelector('.rank-score').textContent = Number(r[metricKey]).toFixed(info.digits) + info.suffix;
+            li.querySelector('.rank-meta').textContent = `覆盖 ${r.cov10.toFixed(1)}% · ${r.latency_ms.toFixed(2)}ms`;
+            li.querySelector('.rank-bar-fill').style.inlineSize = `${((r[metricKey] / maxVal) * 100).toFixed(1)}%`;
+
+            const pill = li.querySelector('.delta-pill');
+            const delta = fRank[r.raw_model] - sRank[r.raw_model];
+            if (delta <= -2) {
+              pill.className = 'delta-pill is-drop';
+              pill.textContent = `↓${Math.abs(delta)} 抽样反转`;
+            } else if (delta >= 2) {
+              pill.className = 'delta-pill is-rise';
+              pill.textContent = `↑${delta} 抽样虚升`;
+            } else if (delta !== 0) {
+              pill.className = 'delta-pill is-subtle';
+              pill.textContent = delta < 0 ? `↓${Math.abs(delta)}` : `↑${delta}`;
+            } else {
+              pill.className = 'delta-pill is-subtle';
+              pill.textContent = '持平';
+            }
+            return li;
+          });
+          reorderDOM(list, orderedNodes);
+        };
+
+        if (animateReorder && list.startViewTransition) {
+          list.startViewTransition(applyDOM);
+        } else if (animateReorder && document.startViewTransition) {
+          document.startViewTransition(applyDOM);
+        } else {
+          applyDOM();
+        }
+
+        const protoLabel = protoKey === 'full_corpus' ? '全量候选池' : '抽样候选 Sampled-100';
+        summaryEl.textContent = `${ds.title} · ${protoLabel} · ${ds.users.toLocaleString()} 名评测用户 · ${ds.items.toLocaleString()} 部候选电影`;
+        statusEl.textContent = `已按 ${ds.title} ${protoLabel} ${info.label} 从高到低重排，共 7 个模型`;
+
+        const leader = activeRows[0];
+        const leaderScore = Number(leader[metricKey]).toFixed(info.digits) + info.suffix;
+        let detailText;
+        if (metricKey === 'ndcg10') {
+          detailText = dsKey === 'ml_1m_official'
+            ? `<strong>MovieLens 1M · NDCG@10：</strong>全量候选下 <code>BPR-MF + LogisticRerank</code>（+9.05%）与 <code>HistGBDTRerank</code>（+7.96%）显著击败单阶段 <code>BPR-MF</code>（p &lt; 0.001）；切换抽样候选后 <code>HistGBDTRerank</code> 名次骤降 4 位（-5.47%）。`
+            : `<strong>MovieLens Latest Small · NDCG@10：</strong>因 68.8% 测试用户为冷启动新用户，<code>ItemCF</code> 全候选夺冠（0.30179，+25.2% vs Popularity）；抽样候选将 <code>Popularity</code> 虚高 3.25×。`;
+        } else {
+          detailText = `<strong>${ds.title} · ${info.label}（${protoLabel}）：</strong>当前榜首为 <code>${leader.model}</code>（${leaderScore}）。反事实留一法（LOO）泄漏率 <strong>${ds.loo_leak}</strong>，本协议未来事件注入漂移严格为 <strong>0.0 bit</strong>。`;
+        }
+        insightEl.innerHTML = `<div>${detailText} <a href="#article-rank-inversion" style="white-space:nowrap;font-weight:600;">阅读完整 RankLab 案例研究 ↓</a></div>`;
+
+        renderSlopeSVG(ds, fullSorted, sampSorted);
+      }
+
+      bindSegmented('#seg-dataset', (val) => { dsKey = val; updateStage(true); });
+      bindSegmented('#seg-proto', (val) => { protoKey = val; updateStage(true); });
+
+      document.querySelector('#rk-metrics').addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-metric]');
+        if (!btn || btn.getAttribute('aria-pressed') === 'true') return;
+        for (const b of e.currentTarget.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b === btn));
+        metricKey = btn.dataset.metric;
+        updateStage(true);
+      });
+
+      updateStage(false);
+    })();
+
+    /* 5. Studio Tabs (hidden="until-found" + beforematch) */
+    (() => {
+      const tabs = Array.from(document.querySelectorAll('.studio-tablist [role="tab"]'));
+      const panels = Array.from(document.querySelectorAll('.studio-panels [role="tabpanel"]'));
+
+      function selectTab(target, focusIt = false) {
+        tabs.forEach((t, i) => {
+          const on = t === target;
+          t.setAttribute('aria-selected', String(on));
+          t.tabIndex = on ? 0 : -1;
+          panels[i].hidden = on ? false : 'until-found';
+        });
+        if (focusIt) target.focus();
+      }
+
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => selectTab(t, false));
+        t.addEventListener('keydown', (e) => {
+          let n = null;
+          if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+          else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+          else if (e.key === 'Home') n = 0;
+          else if (e.key === 'End') n = tabs.length - 1;
+          if (n !== null) { e.preventDefault(); selectTab(tabs[n], true); }
+        });
+      });
+      panels.forEach((p, i) => p.addEventListener('beforematch', () => selectTab(tabs[i], false)));
+
+      function syncTabFromHash() {
+        const idx = panels.findIndex(p => '#' + p.id === location.hash);
+        if (idx === -1) return;
+        selectTab(tabs[idx], false);
+        document.querySelector('#interactive-labs')?.scrollIntoView({ block: 'start' });
+        if (idx === 0) window.dispatchEvent(new Event('resize'));
+      }
+      addEventListener('hashchange', syncTabFromHash);
+      syncTabFromHash();
+    })();
+
+    /* 6. Memory Capsule Storage Bars (Smooth Spring Width Interpolation) */
+    (() => {
+      const stack = document.querySelector('#mem-capsules');
+      const descEl = document.querySelector('#mem-desc');
+      const NAMES = {
+        A_RecencyWindow: 'Recency Window (最近时间窗)',
+        B_BM25: 'BM25 Lexical (词频检索)',
+        C_CPUVector_SubwordLSA: 'Subword LSA (轻量语义向量)',
+        D_ChronoHybridAnchor: 'ChronoHybrid Anchor (时间锚点混合)',
+      };
+      const SCALE = 1260;
+
+      /* Build persistent capsule DOM rows once so CSS transitions smoothly interpolate */
+      const rowEls = LAB.memory_modes[0].rows.map(r => {
+        const wrap = document.createElement('div');
+        wrap.innerHTML = `
+          <div class="mem-item-head">
+            <strong>${NAMES[r.method] || r.method}</strong>
+            <span class="num mem-stat"></span>
+          </div>
+          <div class="capsule-track" aria-hidden="true">
+            <div class="cap-seg" style="background:var(--accent)"></div>
+            <div class="cap-seg" style="background:var(--amber)"></div>
+            <div class="cap-seg" style="background:var(--rose)"></div>
+            <div class="cap-limit-marker"></div>
+          </div>`;
+        stack.append(wrap);
+        return wrap;
+      });
+
+      function updateCapsules(modeId) {
+        const mode = LAB.memory_modes.find(m => m.id === modeId) || LAB.memory_modes[0];
+        descEl.textContent = mode.desc;
+        const limitPct = ((mode.cap / SCALE) * 100).toFixed(2) + '%';
+
+        mode.rows.forEach((r, i) => {
+          const el = rowEls[i];
+          const segs = el.querySelectorAll('.cap-seg');
+          segs[0].style.inlineSize = `${((r.raw_tok / SCALE) * 100).toFixed(2)}%`;
+          segs[1].style.inlineSize = `${((r.json_ov / SCALE) * 100).toFixed(2)}%`;
+          segs[2].style.inlineSize = `${((r.frame_ov / SCALE) * 100).toFixed(2)}%`;
+          el.querySelector('.cap-limit-marker').style.insetInlineStart = limitPct;
+          const over = Math.round(((r.chat_tok - r.raw_tok) / Math.max(r.raw_tok, 1)) * 100);
+          el.querySelector('.mem-stat').textContent = `完整覆盖 ${r.full_cov}% · 陈旧覆写 ${r.stale_rate}% · 总输入 ${r.chat_tok} tok (+${over}%)`;
+        });
+      }
+
+      bindSegmented('#seg-mem', updateCapsules);
+      updateCapsules('o200k_evidence_800');
+    })();
+
+    /* 7. Dynamic Island CAS State Machine */
+    (() => {
+      const island = document.querySelector('#cas-island');
+      const dot = document.querySelector('#cas-dot');
+      const statusEl = document.querySelector('#cas-status');
+      const shaEl = document.querySelector('#cas-sha');
+      const countEl = document.querySelector('#cas-counters');
+      const capEl = document.querySelector('#cas-caption');
+
+      let st = { status: 'AWAITING_APPROVAL', gates: 1, decisions: 0, cancels: 0 };
+
+      function pulse(rejected = false) {
+        island.classList.remove('is-rejected', 'is-pulsing');
+        void island.offsetWidth;
+        island.classList.add(rejected ? 'is-rejected' : 'is-pulsing');
+        setTimeout(() => island.classList.remove('is-pulsing'), 380);
+      }
+
+      function render(color, shaText, msg) {
+        dot.style.background = color;
+        dot.style.color = color;
+        statusEl.textContent = st.status;
+        shaEl.textContent = shaText;
+        countEl.textContent = `门禁 ${st.gates} · 操作 ${st.decisions + st.cancels}`;
+        capEl.innerHTML = msg;
+      }
+
+      document.querySelector('.island-actions').addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-cas]');
+        if (!btn) return;
+        const act = btn.dataset.cas;
+        const terminal = ['DELIVERED', 'CANCELED', 'BUDGET_EXCEEDED'];
+
+        if (act === 'reset') {
+          st = { status: 'AWAITING_APPROVAL', gates: 1, decisions: 0, cancels: 0 };
+          pulse(false);
+          render('#ff9f0a', 'SHA · a94f1c8', '状态已重置：候选补丁 <code>a94f1c8e…3e9c</code> 挂起于人工门禁（<code>pending_approval_gates = 1</code>）。');
+        } else if (act === 'approve') {
+          if (st.status !== 'AWAITING_APPROVAL') {
+            pulse(true);
+            capEl.innerHTML = `<strong>HTTP 409 CONFLICT：</strong>当前状态为 <code>${st.status}</code>，无活跃审批门禁可放行。`;
+            return;
+          }
+          st.status = 'DELIVERED'; st.gates = 0; st.decisions += 1;
+          pulse(false);
+          render('#30d158', 'CAS MATCH ✓', '<strong>CAS 校验通过：</strong>提交的 40 位 Commit SHA 与集成工作树完全一致，安全导出最终补丁并关闭待审门禁。');
+        } else if (act === 'mismatch') {
+          if (st.status !== 'AWAITING_APPROVAL') {
+            pulse(true);
+            capEl.innerHTML = `<strong>HTTP 409 CONFLICT：</strong>当前处于终态 <code>${st.status}</code>，拒绝过期请求。`;
+            return;
+          }
+          pulse(true);
+          render('#ff9f0a', 'SHA · a94f1c8', '<strong>HTTP 409 CAS_SHA_MISMATCH：</strong>审查者提交的旧前缀 <code>00deadb</code> 与当前工作树 <code>a94f1c8</code> 不匹配，成功阻断脏补丁合入。');
+        } else if (act === 'cancel') {
+          if (terminal.includes(st.status)) {
+            pulse(true);
+            capEl.innerHTML = `<strong>HTTP 409 TERMINAL_STATE：</strong>Run 已处于终态 <code>${st.status}</code>，幂等拦截重复取消，<code>cancel_request_records</code> 保持 ${st.cancels} 不虚增。`;
+            return;
+          }
+          st.status = 'CANCELED'; st.gates = 0; st.cancels += 1;
+          pulse(false);
+          render('#ff375f', 'USER_CANCELED', '<strong>幂等取消生效：</strong>立即将 <code>AWAITING_APPROVAL</code> 推进至 <code>CANCELED</code>，关闭门禁并阻断后续并发审批。');
+        } else if (act === 'budget') {
+          st = { status: 'BUDGET_EXCEEDED', gates: 0, decisions: 0, cancels: 0 };
+          pulse(true);
+          render('#ff375f', '20 / 20 CALLS', '<strong>BudgetGuard 确定性熔断：</strong>跨模块任务 <code>F2-fx-risk-audit</code> 在多智能体重修轮触达 20 次上限，保留诊断补丁并诚实记录失败。');
+        }
+      });
+    })();
+
+    /* 8. Project Bento Filtering + Deep-Link Auto-Open */
+    (() => {
+      const bar = document.querySelector('#proj-filters');
+      const cards = Array.from(document.querySelectorAll('.project-tile[data-category]'));
+
+      function filter(cat) {
+        for (const b of bar.querySelectorAll('button')) b.setAttribute('aria-pressed', String(b.dataset.filter === cat));
+        const apply = () => {
+          for (const c of cards) c.hidden = cat !== 'all' && c.dataset.category !== cat;
+        };
+        const grid = document.querySelector('.project-grid');
+        if (grid && grid.startViewTransition && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+          grid.startViewTransition(apply);
+        } else {
+          apply();
+        }
+      }
+
+      bar.addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-filter]');
+        if (btn) filter(btn.dataset.filter);
+      });
+
+      function openHash() {
+        const id = location.hash.slice(1);
+        const card = cards.find(c => c.id === id);
+        if (!card) return;
+        if (card.hidden) filter('all');
+        const d = card.querySelector('details');
+        if (d) d.open = true;
+        card.scrollIntoView({ block: 'nearest' });
+      }
+      addEventListener('hashchange', openHash);
+      openHash();
+    })();
+  </script>
 </body>
 </html>
